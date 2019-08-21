@@ -1,1 +1,22 @@
-<p>chat works!</p>
+<div class="container">
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="inbox_chat">
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="text" [(ngModel)]="messagecontent" class="form-control" placeholder="Type a message" aria-describedby="button-addon2" name="messagecontent" id="messagecontent">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="chat(messagecontent)">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                    <h3>Chat Messages</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let message of messages">{{message}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
