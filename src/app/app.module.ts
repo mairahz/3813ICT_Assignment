@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SocketService } from './services/socket.service';
 import { GroupsComponent } from './groups/groups.component';
+import { ChannelComponent } from './channel/channel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
-    GroupsComponent
+    GroupsComponent,
+    ChannelComponent
   ],
   imports: [
     BrowserModule,
