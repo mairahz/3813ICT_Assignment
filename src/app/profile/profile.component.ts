@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router: Router) {
     this.valid = sessionStorage.getItem("valid");
-    console.log(this.valid);
     if(this.valid != "true"){
       this.router.navigate(['login']);
     }

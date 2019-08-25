@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../services/socket.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-chat',
@@ -11,8 +12,14 @@ export class ChatComponent implements OnInit {
   messagecontent: string = "";
   messages: string[] = [];
   ioConnection:any;
+  valid: string = "";
 
-  constructor(private socketService:SocketService) { }
+  constructor(private socketService:SocketService, private router: Router) {
+    this.valid = sessionStorage.getItem("valid");
+    if(this.valid != "true"){
+      this.router.navigate(['login']);
+    }
+  }
 
   ngOnInit() {
     this.initIoConnection();

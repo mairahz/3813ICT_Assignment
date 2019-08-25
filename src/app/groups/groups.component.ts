@@ -12,9 +12,15 @@ export class GroupsComponent implements OnInit {
   newGroup: boolean = false;
   name: string = "";
   selectedGroup: string = "";
+  valid: string = "";
   
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.valid = sessionStorage.getItem("valid");
+    if(this.valid != "true"){
+      this.router.navigate(['login']);
+    }
+   }
 
   ngOnInit() {
   }

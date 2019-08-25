@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-channel',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChannelComponent implements OnInit {
 
-  constructor() { }
+  valid:string = "";
+
+  constructor(private router: Router) { 
+    this.valid = sessionStorage.getItem("valid");
+    if(this.valid != "true"){
+      this.router.navigate(['login']);
+    }
+  }
 
   ngOnInit() {
   }
