@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-groups',
@@ -11,9 +11,10 @@ export class GroupsComponent implements OnInit {
   groups: string[] =[];
   newGroup: boolean = false;
   name: string = "";
+  selectedGroup: string = "";
   
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -34,6 +35,10 @@ export class GroupsComponent implements OnInit {
     } else {
       alert("Please enter a group name.");
     }
+  }
+
+  private onSelect(group: string){
+    this.router.navigate(['channel']);
   }
 
   private deleteGroup(){
