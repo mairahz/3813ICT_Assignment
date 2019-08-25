@@ -7,6 +7,7 @@ import * as $ from 'jquery';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
+
   groups: string[] =[];
   newGroup: boolean = false;
   name: string = "";
@@ -17,7 +18,7 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClickGroup(){
+  private onClickGroup(){
     if(!this.newGroup){
       this.newGroup = true;
     } else {
@@ -25,8 +26,18 @@ export class GroupsComponent implements OnInit {
     }
   }
 
-  itemSubmit(){
-    console.log(this.name);
+  private groupSubmit(){
+    if(this.name){
+      this.groups.push(this.name);
+      this.newGroup = false;
+      this.name = "";
+    } else {
+      alert("Please enter a group name.");
+    }
+  }
+
+  private deleteGroup(){
+    console.log("delete")
   }
 
 }
