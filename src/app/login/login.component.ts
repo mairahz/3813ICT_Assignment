@@ -9,7 +9,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  email = "";
+  username = "";
   upwd = "";
   public user = {};
 
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   itemSubmit() {
-    this.user = { email: this.email, upwd: this.upwd};
+    this.user = { username: this.username, upwd: this.upwd};
     this.service.sendData(this.user);
   };
 

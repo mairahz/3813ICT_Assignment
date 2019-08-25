@@ -33,7 +33,7 @@ app.post('/login/api/login', function(req, res){
         return res.endStatus(400);
     }
     console.log(req.body.upwd)
-    let user = new User(req.body.email, req.body.upwd);
+    let user = new User(req.body.username, req.body.upwd);
     valid = JSON.stringify(user.check())
     res.send(valid);
 });
