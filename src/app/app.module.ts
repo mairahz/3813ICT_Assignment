@@ -12,6 +12,7 @@ import { ChatComponent } from './chat/chat.component';
 import { GroupsComponent } from './groups/groups.component';
 import { ChannelComponent } from './channel/channel.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginComponent } from './login/login.component';
     ChatComponent,
     GroupsComponent,
     ChannelComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

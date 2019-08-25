@@ -1,0 +1,36 @@
+<div class ="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-md-offset-4" *ngIf="!editmode; else elseBlock">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">Username</th>
+                        <td>{{username}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>{{email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" (click)="onClickEdit()">
+                Edit
+            </button>
+        </div>
+        <ng-template #elseBlock>
+            <form id="loginform">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="username" class="form-control" [(ngModel)]="username" name="username" id="username" placeholder={{username}}>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" [(ngModel)]="email" name="email" id="email" placeholder={{email}}>
+                </div>
+                <button type="submit" class="btn btn-secondary" (click)="onClickCancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary" (click)="saveChanges()">Save</button>
+            </form>
+        </ng-template>
+    </div>
+</div>
+    
