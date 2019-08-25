@@ -28,7 +28,7 @@ export class LoginService {
       this.data = data;
       console.log(data);
       if(this.data.valid){
-        this.router.navigate(['group']);
+        this.router.navigate(['']);
       } else {
         alert("User Credentials does not match.");
       }

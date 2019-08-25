@@ -8,8 +8,8 @@ import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [  
-                          {path: '', component: LoginComponent},
-                          {path: 'group', component: GroupsComponent},
+                          {path: 'login', component: LoginComponent},
+                          {path: '', component: GroupsComponent},
                           {path: 'channel', component: ChannelComponent},
                           {path: 'chat', component: ChatComponent},
                           {path: 'profile', component: ProfileComponent}
