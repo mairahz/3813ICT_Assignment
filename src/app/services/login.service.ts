@@ -26,7 +26,6 @@ export class LoginService {
     })
     .subscribe(data => {
       this.data = data;
-      console.log(data);
       if(this.data.valid){
         this.router.navigate(['']);
       } else {

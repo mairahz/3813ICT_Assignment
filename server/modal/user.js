@@ -1,32 +1,43 @@
+var fs = require('fs');
+var path = require('path');
+let file = path.join(__dirname, 'users.json');
+
 class User {
     valid = false;
+    users = [];
     user;
-    obj = {
-        users: [
-            {username: "super", email: "super@com.au", password: "super", type: ["SuperAdmin", "GroupAdmin"]},
-        ]
-    }
+
 
     constructor(username, upwd) {
         this.username = username;
         this.upwd = upwd;
     }
 
+    open() {
+        this.users = JSON.parse(fs.readFileSync(file).toString());
+
+        // fs.readFileSync(file, function(err, data){
+        //     if(err) throw err;
+        //     this.users = JSON.parse(data.toString());
+        //     this.check();
+        // });
+    }
+
     check() {
-        console.log(this.username);
-        console.log(this.upwd)
-        for(let i = 0; i<this.obj.users.length; i++){
-            if(this.obj.users[i].username == this.username && this.obj.users[i].password == this.upwd) {
-                this.valid = true
-                this.user = this.obj.users[i];
+        this.open();
+        for(let i = 0; i<this.users.length; i++){
+            if(this.users[i].username == this.username && this.users[i].password == this.upwd) {
+                this.valid = true;
+                this.user = this.users[i];
                 break;
-           }
+            }
         }
-       if(this.valid == true){
-           return {user: this.user, valid: this.valid};
-       } else {
-           return({error: "error", valid: this.valid});
-       }
+
+        if(this.valid == true){
+            return {user: this.user, valid: this.valid};
+        } else {
+            return({error: "error", valid: this.valid});
+        }
     }
 }
 
