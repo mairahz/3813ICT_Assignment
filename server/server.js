@@ -34,6 +34,5 @@ app.post('/login/api/login', function(req, res){
     }
     let user = new User(req.body.username, req.body.upwd);
     valid = JSON.stringify(user.check());
-    console.log(valid);
     res.send(valid);
 });

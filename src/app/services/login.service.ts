@@ -27,9 +27,9 @@ export class LoginService {
     .subscribe(data => {
       this.data = data;
       if(this.data.valid){
-        this.router.navigate(['']);
+        this.router.navigate(['/user']);
       } else {
-        alert("User Credentials does not match.");
+        alert("Invalid User Credentials.");
       }
       this.sendDataSubject.next(data);
     });

@@ -33,8 +33,10 @@ class User {
             }
         }
 
-        if(this.valid == true){
-            return {user: this.user, valid: this.valid};
+        if(this.valid == true && this.user.group == true){
+            return {user: this.user, valid: this.valid, usersList: this.users};
+        } else if(this.valid == true && this.user.group == false) {
+            return {user: this.user, valid: this.valid}
         } else {
             return({error: "error", valid: this.valid});
         }
