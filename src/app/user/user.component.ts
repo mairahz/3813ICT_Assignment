@@ -40,33 +40,42 @@ export class UserComponent implements OnInit {
     this.new = true;
   }
   private userCreate(){
-    let unique = true;
-    for(let i=0; i<this.users.length; i++){
-      if(this.users[i].username == this.username){
-        unique = false;
-        break;
-      }
-    }
-    if(unique){
-      this.user = {username: this.username, email: this.email, upwd: this.upwd, super: this.super, group: this.group}
-      this.users.push(this.user);
-      localStorage.setItem("users", JSON.stringify(this.users));
-      this.service.sendData(this.users);
-      this.username = "";
-      this.email = "";
-      this.upwd = "";
-      this.super = false;
-      this.group = false;
-      this.new = false;
+    if(!this.username){
+      alert("Please enter a username.")
+    } else if(!this.email){
+      alert("Please enter an email address.")
+    } else if(!this.upwd){
+      alert("Please enter a password.")
     } else {
-      alert("Sorry, this username is taken. Please try a new one.")
+      let unique = true;
+      for(let i=0; i<this.users.length; i++){
+        if(this.users[i].username == this.username){
+          unique = false;
+          break;
+        }
+      }
+      if(unique){
+        this.user = {username: this.username, email: this.email, upwd: this.upwd, super: this.super, group: this.group}
+        this.users.push(this.user);
+        localStorage.setItem("users", JSON.stringify(this.users));
+        this.service.sendData(this.users);
+        this.username = "";
+        this.email = "";
+        this.upwd = "";
+        this.super = false;
+        this.group = false;
+        this.new = false;
+      } else {
+        alert("Sorry, this username is taken. Please try a new one.")
+      }
+      
     }
   }
 
   private userDelete(username){
     for(let i=0; i<= this.users.length; i++){
       if(this.users[i].username == username){
-        this.users.splice(i);
+        this.users.splice(i, 1);
         break;
       }
     }
