@@ -13,18 +13,8 @@ class User {
         this.upwd = upwd;
     }
 
-    open() {
-        this.users = JSON.parse(fs.readFileSync(file).toString());
-
-        // fs.readFileSync(file, function(err, data){
-        //     if(err) throw err;
-        //     this.users = JSON.parse(data.toString());
-        //     this.check();
-        // });
-    }
-
     check() {
-        this.open();
+        this.users = JSON.parse(fs.readFileSync(file).toString());
         for(let i = 0; i<this.users.length; i++){
             if(this.users[i].username == this.username && this.users[i].password == this.upwd) {
                 this.valid = true;
@@ -40,6 +30,16 @@ class User {
         } else {
             return({error: "error", valid: this.valid});
         }
+    }
+
+    add(user) {
+        fs.writeFile(file, user, function(err) { 
+            if(err){
+                console.log(err);
+            } else {
+                console.log('done');
+            }
+        });
     }
 }
 

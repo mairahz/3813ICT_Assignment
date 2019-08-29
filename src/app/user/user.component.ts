@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { UserService } from '../services/user.service';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -18,15 +19,13 @@ export class UserComponent implements OnInit {
   user: {};
   currName: string = "";
 
-  constructor(private router: Router, private service: LoginService) {
+  constructor(private router: Router, private service: UserService) {
     this.valid = sessionStorage.getItem("valid");
     if(this.valid != "true"){
       this.router.navigate(['login']);
     }
-    this.service.sendData$.subscribe((data) => {
-      this.users = data.usersList;
-      console.log(this.users);
-    });
+    this.users = JSON.parse(sessionStorage.getItem("users"));
+    
    }
 
   ngOnInit() {
@@ -39,6 +38,8 @@ export class UserComponent implements OnInit {
   private userCreate(){
     this.user = {username: this.username, email: this.email, upwd: this.upwd}
     this.users.push(this.user);
+    console.log(this.users);
+    this.service.sendData(this.users);
     this.new = false;
   }
 

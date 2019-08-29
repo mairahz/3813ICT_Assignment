@@ -12,13 +12,16 @@
         <a class="nav-link" routerLink="/" href="#" *ngIf="valid">Groups</a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user" href="#" *ngIf="valid">Users</a>
+      </li>
+
       <li class="nav-item dropdown" *ngIf="valid">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/profile" href="#">My Account</a>
-          <a class="dropdown-item" routerLink="/user" href="#">Create New User</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="onClickLogout()" routerLink="/login" href="#">Log Out</a>
         </div>

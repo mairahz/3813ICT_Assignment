@@ -16,6 +16,7 @@ export class AppComponent {
       if(data.valid){
         this.valid = true;
         this.user = data;
+        console.log(data)
         this.addStorage(this.user);
         sessionStorage.setItem("valid", data.valid);
       } else {
@@ -31,7 +32,9 @@ export class AppComponent {
       if(user.valid){
         sessionStorage.setItem("username", user.user.username);
         sessionStorage.setItem("email", user.user.email);
-        sessionStorage.setItem("type", user.user.type);
+        sessionStorage.setItem("super", user.user.super);
+        sessionStorage.setItem("group", user.user.group);
+        sessionStorage.setItem("users", JSON.stringify(user.usersList));
       }
     }
   };

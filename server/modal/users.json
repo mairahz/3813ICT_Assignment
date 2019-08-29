@@ -1,3 +1,1 @@
-[
-    {"username": "super", "email": "super@com.au", "password": "super", "super": true, "group": true}
-]
+[{"username":"super","email":"super@com.au","password":"super","super":true,"group":true},{"username":"tata","email":"tata","upwd":"tata"}]

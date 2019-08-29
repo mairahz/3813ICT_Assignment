@@ -36,3 +36,13 @@ app.post('/login/api/login', function(req, res){
     valid = JSON.stringify(user.check());
     res.send(valid);
 });
+
+app.post('/api/user', function(req, res){
+    if (!req.body){
+        return res.endStatus(400);
+    }
+    // console.log(req.body);
+    let user = new User();
+    let data = JSON.stringify(req.body);
+    user.add(data);
+});
