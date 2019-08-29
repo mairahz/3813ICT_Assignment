@@ -55,6 +55,9 @@ export class UserComponent implements OnInit {
         }
       }
       if(unique){
+        if(this.super){
+          this.group = true;
+        }
         this.user = {username: this.username, email: this.email, upwd: this.upwd, super: this.super, group: this.group}
         this.users.push(this.user);
         localStorage.setItem("users", JSON.stringify(this.users));
