@@ -11,7 +11,7 @@ export class ChannelComponent implements OnInit {
   valid:string = "";
 
   constructor(private router: Router) { 
-    this.valid = sessionStorage.getItem("valid");
+    this.valid = localStorage.getItem("valid");
     if(this.valid != "true"){
       this.router.navigate(['login']);
     }

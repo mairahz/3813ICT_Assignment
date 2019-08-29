@@ -17,9 +17,9 @@ export class AppComponent {
         this.valid = true;
         this.user = data;
         this.addStorage(this.user);
-        sessionStorage.setItem("valid", data.valid);
+        localStorage.setItem("valid", data.valid);
       } else {
-        sessionStorage.setItem("valid", data.valid);
+        localStorage.setItem("valid", data.valid);
       } 
     });
   }
@@ -29,17 +29,17 @@ export class AppComponent {
   addStorage(user){
     if (typeof(Storage) !== "undefined") {
       if(user.valid){
-        sessionStorage.setItem("username", user.user.username);
-        sessionStorage.setItem("email", user.user.email);
-        sessionStorage.setItem("super", user.user.super);
-        sessionStorage.setItem("group", user.user.group);
-        sessionStorage.setItem("users", JSON.stringify(user.usersList));
+        localStorage.setItem("username", user.user.username);
+        localStorage.setItem("email", user.user.email);
+        localStorage.setItem("super", user.user.super);
+        localStorage.setItem("group", user.user.group);
+        localStorage.setItem("users", JSON.stringify(user.usersList));
       }
     }
   };
 
   onClickLogout(){
-    sessionStorage.clear();
+    localStorage.clear();
     this.valid = false;
   }
 }
