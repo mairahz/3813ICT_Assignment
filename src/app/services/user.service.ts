@@ -25,14 +25,14 @@ export class UserService {
       headers: headers
     })
     .subscribe(data => {
-      // console.log(data);
+      console.log(data);
       // this.data = data;
       // if(this.data.valid){
       //   this.router.navigate(['/user']);
       // } else {
       //   alert("Invalid User Credentials.");
       // }
-      // this.sendDataSubject.next(data);
+      this.sendDataSubject.next(data);
     });
   }
 }

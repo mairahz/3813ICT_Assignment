@@ -4,7 +4,7 @@
             <h1 class="text-center py-3 px-lg-5">User List</h1>
             <button type="button" class="btn btn-success my-3" (click)="onClickUser()" >Create new user</button>
             <ul class="list-group btn-group">
-                <li class="list-group-item d-flex list-group-item-action">{{currName}} (You)</li>
+                <!-- <li class="list-group-item d-flex list-group-item-action">{{currName}} (You)</li> -->
                 <li class="list-group-item d-flex list-group-item-action" *ngFor="let user of users">{{user.username}}</li>
             </ul>
         </div>

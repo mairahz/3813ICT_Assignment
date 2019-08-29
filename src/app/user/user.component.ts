@@ -38,7 +38,7 @@ export class UserComponent implements OnInit {
   private userCreate(){
     this.user = {username: this.username, email: this.email, upwd: this.upwd}
     this.users.push(this.user);
-    console.log(this.users);
+    sessionStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);
     this.new = false;
   }
