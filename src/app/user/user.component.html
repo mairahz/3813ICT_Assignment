@@ -4,7 +4,6 @@
             <h1 class="text-center py-3 px-lg-5">User List</h1>
             <button type="button" class="btn btn-success my-3" (click)="onClickUser()" >Create new user</button>
             <ul class="list-group btn-group" *ngFor="let user of users">
-                <!-- <li class="list-group-item d-flex list-group-item-action">{{currName}} (You)</li> -->
                 <li class="list-group-item d-flex justify-content-between" *ngIf="user.username == currName">
                     <p class="p-0 m-0 flex-grow-1">{{user.username}} (You)</p>
                 </li>
@@ -43,7 +42,10 @@
                             Group Admin
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary" (click)="userCreate()">Create</button>
+                    <div class="btn-group float-right">
+                        <button type="submit" class="btn btn-secondary my-3" (click)="onClickCancel()">Cancel</button>
+                        <button type="submit" class="btn btn-success my-3" (click)="userCreate()">Create</button>
+                    </div>
                 </form>
             </div>
         </ng-template>

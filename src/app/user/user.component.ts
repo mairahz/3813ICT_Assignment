@@ -62,4 +62,7 @@ export class UserComponent implements OnInit {
     this.service.sendData(this.users);
   }
 
+  private onClickCancel(){
+    this.new = false;
+  }
 }
