@@ -40,16 +40,27 @@ export class UserComponent implements OnInit {
     this.new = true;
   }
   private userCreate(){
-    this.user = {username: this.username, email: this.email, upwd: this.upwd, super: this.super, group: this.group}
-    this.users.push(this.user);
-    localStorage.setItem("users", JSON.stringify(this.users));
-    this.service.sendData(this.users);
-    this.username = "";
-    this.email = "";
-    this.upwd = "";
-    this.super = false;
-    this.group = false;
-    this.new = false;
+    let unique = true;
+    for(let i=0; i<this.users.length; i++){
+      if(this.users[i].username == this.username){
+        unique = false;
+        break;
+      }
+    }
+    if(unique){
+      this.user = {username: this.username, email: this.email, upwd: this.upwd, super: this.super, group: this.group}
+      this.users.push(this.user);
+      localStorage.setItem("users", JSON.stringify(this.users));
+      this.service.sendData(this.users);
+      this.username = "";
+      this.email = "";
+      this.upwd = "";
+      this.super = false;
+      this.group = false;
+      this.new = false;
+    } else {
+      alert("Sorry, this username is taken. Please try a new one.")
+    }
   }
 
   private userDelete(username){
@@ -63,6 +74,11 @@ export class UserComponent implements OnInit {
   }
 
   private onClickCancel(){
+    this.username = "";
+    this.email = "";
+    this.upwd = "";
+    this.super = false;
+    this.group = false;
     this.new = false;
   }
 }
