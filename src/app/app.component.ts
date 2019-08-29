@@ -16,7 +16,6 @@ export class AppComponent {
       if(data.valid){
         this.valid = true;
         this.user = data;
-        console.log(data)
         this.addStorage(this.user);
         sessionStorage.setItem("valid", data.valid);
       } else {

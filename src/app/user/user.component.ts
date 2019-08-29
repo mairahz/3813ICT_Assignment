@@ -12,7 +12,8 @@ export class UserComponent implements OnInit {
 
   valid: string = "";
   new: boolean = false;
-  users: object[] = [];
+  users: Array<any> = [];
+
   username: string = "";
   email: string = "";
   upwd: string = "";
@@ -25,11 +26,11 @@ export class UserComponent implements OnInit {
       this.router.navigate(['login']);
     }
     this.users = JSON.parse(sessionStorage.getItem("users"));
+    this.currName = sessionStorage.getItem("username");
     
    }
 
   ngOnInit() {
-    this.currName = sessionStorage.getItem("username");
   }
 
   private onClickUser() {
@@ -44,11 +45,13 @@ export class UserComponent implements OnInit {
   }
 
   private userDelete(username){
-    for(let i=0; i <= this.users.length; i++){
-      if(username == this.users.username){
-
+    for(let i=0; i<= this.users.length; i++){
+      if(this.users[i].username == username){
+        this.users.splice(i);
+        break;
       }
     }
+    this.service.sendData(this.users);
   }
 
 }
