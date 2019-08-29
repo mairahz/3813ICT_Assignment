@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from '../services/user.service';
-import { LoginService } from '../services/login.service';
+
 
 @Component({
   selector: 'app-user',
@@ -41,6 +41,14 @@ export class UserComponent implements OnInit {
     sessionStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);
     this.new = false;
+  }
+
+  private userDelete(username){
+    for(let i=0; i <= this.users.length; i++){
+      if(username == this.users.username){
+
+      }
+    }
   }
 
 }

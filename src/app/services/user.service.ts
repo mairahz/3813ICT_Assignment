@@ -25,7 +25,7 @@ export class UserService {
       headers: headers
     })
     .subscribe(data => {
-      console.log(data);
+      
       // this.data = data;
       // if(this.data.valid){
       //   this.router.navigate(['/user']);
