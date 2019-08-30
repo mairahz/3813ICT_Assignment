@@ -1,20 +1,16 @@
 <div class="container">
-        <div class="row">
-            <div class="col-sm-9">
-                <h3 class="py-3">Channels</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-4 col-md-offset-4">
+            <h2 class="py-3">Create a new channel</h2>
+            <form id="loginform">
+            <div class="form-group">
+                <label for="name">Channel Name: </label>
+                <input type="name" class="form-control" [(ngModel)]="name" name="name" id="name" placeholder="Enter group name">
             </div>
-            <div class="col-sm-3">
-                <div class="btn-group py-3" role="group">
-                    <button type="button" class="btn btn-success btn-sm">Create new channel</button>
-                    <button type="button" class="btn btn-danger btn-sm" (click)="deleteGroup()">Delete group</button>
-                </div>
-            </div>
-        </div>
-        <div class="inbox_chat">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" routerLink="/chat">channel1</li>
-            </ul>
+            <button type="submit" class="btn btn-success" (click)="channelSubmit()">Create</button>
+            </form>
         </div>
     </div>
+</div>
     
     
