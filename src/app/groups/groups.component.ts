@@ -63,12 +63,8 @@ export class GroupsComponent implements OnInit {
     }
   }
 
-  private onSelect(group: string){
-    this.router.navigate(['channel']);
-  }
-
-  private deleteGroup(){
-    console.log("delete")
+  private groupDelete(group: string){
+    console.log(group)
   }
 
 }
