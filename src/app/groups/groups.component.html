@@ -7,11 +7,27 @@
       <button type="button" class="btn btn-success my-3" (click)="onClickGroup()" >Create new group</button>
     </div>
   </div>
-  <div class="inbox_chat" *ngIf="!newGroup">
+  <!-- <div class="inbox_chat" *ngIf="!newGroup">
     <ul class="list-group btn-group">
       <li class="list-group-item d-flex list-group-item-action" *ngFor="let group of groups" (click)="onSelect(group)">{{group}}</li>
-    </ul>
-  </div>
+    </ul> -->
+  <!-- </div> -->
+  <div class="panel-group" *ngIf="!newGroup">
+      <div class="panel panel-default" *ngFor="let group of groups">
+        <div class="panel-heading list-group">
+          <h4 class="list-group">
+            <a data-toggle="collapse" class="list-group-item list-group-item-info list-group-item-action" href="#{{group}}">{{group}}</a>
+          </h4>
+        </div>
+        <div id="{{group}}" class="panel-collapse collapse">
+          <ul class="list-group">
+            <li class="list-group-item">One</li>
+            <li class="list-group-item">Two</li>
+            <li class="list-group-item">Three</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
   <ng-template #elseBlock>
     <div class="row justify-content-center">
