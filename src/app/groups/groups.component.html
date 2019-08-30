@@ -20,10 +20,11 @@
           </h4>
         </div>
         <div id="{{group.name}}" class="panel-collapse collapse list-group">
-          <ul class="list-group">
-            <li class="list-group-item">One</li>
-            <li class="list-group-item">Two</li>
-            <li class="list-group-item">Three</li>
+          <ul class="list-group" *ngFor="let channel of group.channels">
+            <li class="list-group-item d-flex justify-content-between">
+              <p class="p-0 m-0 flex-grow-1">{{channel}}</p>
+              <button type="button" class="btn btn-danger btn-sm" (click)="channelDelete(channel, group.name)">Delete</button>
+            </li>
           </ul>
           <div class="panel-footer btn-group list-group-item">
             <button type="button" class="btn btn-danger btn-sm" (click)="groupDelete(group.name)">Delete {{group.name}}</button>

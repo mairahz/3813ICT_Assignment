@@ -90,4 +90,28 @@ export class GroupsComponent implements OnInit {
     this.router.navigate(['channel', group]);
   }
 
+  private channelDelete(channel, group){
+    for(let i=0; i<=this.user.groupList.length; i++){
+      if(group == this.user.groupList[i].name){
+        for(let j=0; j<=this.user.groupList[i].channels.length; j++){
+          if(channel == this.user.groupList[i].channels[j]){
+            this.user.groupList[i].channels.splice(j, 1);
+            break;
+          }
+        }
+        break;
+      }
+    }
+    
+    for(let i=0; i<=this.users.length; i++){
+      if(this.user.username == this.users[i].username){
+        localStorage.setItem("user", JSON.stringify(this.user));
+        this.users[i] = this.user;
+        break;
+      }
+    }
+    localStorage.setItem("users", JSON.stringify(this.users));
+    this.service.sendData(this.users);
+  }
+
 }
