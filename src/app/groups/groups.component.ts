@@ -64,7 +64,28 @@ export class GroupsComponent implements OnInit {
   }
 
   private groupDelete(group: string){
-    console.log(group)
+    for(let i=0; i<= this.users.length; i++){
+      if(this.users[i].username == this.user.username){
+        for(let j=0; j<=this.user.groupList.length; j++){
+          if(this.user.groupList[j] == group){
+            this.user.groupList.splice(j, 1);
+            for(let k=0; k<=this.user.adminGroupList.length; k++){
+              if(this.user.adminGroupList[k] == group){
+                this.user.adminGroupList.splice(k, 1)
+                break;
+              }
+            }
+            break;
+          }
+        }
+        localStorage.setItem("user", JSON.stringify(this.user));
+        this.users[i] = this.user;
+        break;
+      }
+    }
+    console.log(this.user)
+    localStorage.setItem("users", JSON.stringify(this.users));
+    this.service.sendData(this.users);
   }
 
 }
