@@ -114,4 +114,8 @@ export class GroupsComponent implements OnInit {
     this.service.sendData(this.users);
   }
 
+  private onClickChannel(channel){
+    this.router.navigate(['chat', channel]);
+  }
+
 }
