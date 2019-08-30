@@ -16,18 +16,18 @@
       <div class="panel panel-default" *ngFor="let group of groups">
         <div class="panel-heading list-group">
           <h4 class="list-group">
-            <a data-toggle="collapse" class="list-group-item list-group-item-info list-group-item-action" href="#{{group}}">{{group}}</a> 
+            <a data-toggle="collapse" class="list-group-item list-group-item-info list-group-item-action" href="#{{group.name}}">{{group.name}}</a> 
           </h4>
         </div>
-        <div id="{{group}}" class="panel-collapse collapse list-group">
+        <div id="{{group.name}}" class="panel-collapse collapse list-group">
           <ul class="list-group">
             <li class="list-group-item">One</li>
             <li class="list-group-item">Two</li>
             <li class="list-group-item">Three</li>
           </ul>
           <div class="panel-footer btn-group list-group-item">
-            <button type="button" class="btn btn-danger btn-sm" (click)="groupDelete(group)">Delete {{group}}</button>
-            <button type="button" class="btn btn-success btn-sm" (click)="channelCreate(group)">Create new Channel</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="groupDelete(group.name)">Delete {{group.name}}</button>
+            <button type="button" class="btn btn-success btn-sm" (click)="channelCreate(group.name)">Create new Channel</button>
           </div>
         </div>
       </div>

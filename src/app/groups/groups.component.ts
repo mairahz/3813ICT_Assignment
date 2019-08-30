@@ -43,8 +43,8 @@ export class GroupsComponent implements OnInit {
 
   private groupSubmit(){
     if(this.name){
-      this.user.groupList.push(this.name);
-      this.user.adminGroupList.push(this.name);
+      this.user.groupList.push({name: this.name, channels: []});
+      this.user.adminGroupList.push({name: this.name, channels: []});
       this.groups = this.user.groupList;
       localStorage.setItem("user", JSON.stringify(this.user));
       for(let i=0; i<=this.users.length; i++){
@@ -66,10 +66,10 @@ export class GroupsComponent implements OnInit {
     for(let i=0; i<= this.users.length; i++){
       if(this.users[i].username == this.user.username){
         for(let j=0; j<=this.user.groupList.length; j++){
-          if(this.user.groupList[j] == group){
+          if(this.user.groupList[j].name == group){
             this.user.groupList.splice(j, 1);
             for(let k=0; k<=this.user.adminGroupList.length; k++){
-              if(this.user.adminGroupList[k] == group){
+              if(this.user.adminGroupList[k].name == group){
                 this.user.adminGroupList.splice(k, 1)
                 break;
               }
