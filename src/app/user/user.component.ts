@@ -58,7 +58,7 @@ export class UserComponent implements OnInit {
         if(this.super){
           this.group = true;
         }
-        this.user = {username: this.username, email: this.email, upwd: this.upwd, super: this.super, group: this.group}
+        this.user = {username: this.username, email: this.email, password: this.upwd, super: this.super, group: this.group}
         this.users.push(this.user);
         localStorage.setItem("users", JSON.stringify(this.users));
         this.service.sendData(this.users);

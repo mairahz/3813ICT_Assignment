@@ -16,17 +16,17 @@ class User {
     check() {
         this.users = JSON.parse(fs.readFileSync(file).toString());
         for(let i = 0; i<this.users.length; i++){
+            console.log(this.users[i].username)
             if(this.users[i].username == this.username && this.users[i].password == this.upwd) {
                 this.valid = true;
                 this.user = this.users[i];
+                console.log(this.user)
                 break;
             }
         }
 
-        if(this.valid == true && this.user.group == true){
+        if(this.valid == true){
             return {user: this.user, valid: this.valid, usersList: this.users};
-        } else if(this.valid == true && this.user.group == false) {
-            return {user: this.user, valid: this.valid}
         } else {
             return({error: "error", valid: this.valid});
         }
