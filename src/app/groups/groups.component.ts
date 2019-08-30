@@ -28,7 +28,6 @@ export class GroupsComponent implements OnInit {
     this.users = JSON.parse(localStorage.getItem("users"));
     this.groups = this.user.groupList;
     this.adminGroups = JSON.parse(localStorage.getItem("adminGroupList"));
-    console.log(this.groups)
    }
 
   ngOnInit() {
@@ -83,9 +82,12 @@ export class GroupsComponent implements OnInit {
         break;
       }
     }
-    console.log(this.user)
     localStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);
+  }
+
+  private channelCreate(group){
+    this.router.navigate(['channel', group]);
   }
 
 }

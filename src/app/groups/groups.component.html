@@ -25,7 +25,10 @@
             <li class="list-group-item">Two</li>
             <li class="list-group-item">Three</li>
           </ul>
-          <div class="panel-footer list-group-item"><button type="button" class="btn btn-danger btn-sm" (click)="groupDelete(group)">Delete {{group}}</button></div>
+          <div class="panel-footer btn-group list-group-item">
+            <button type="button" class="btn btn-danger btn-sm" (click)="groupDelete(group)">Delete {{group}}</button>
+            <button type="button" class="btn btn-success btn-sm" (click)="channelCreate(group)">Create new Channel</button>
+          </div>
         </div>
       </div>
     </div>

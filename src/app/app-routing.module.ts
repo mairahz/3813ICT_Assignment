@@ -11,7 +11,7 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [  
                           {path: 'login', component: LoginComponent},
                           {path: '', component: GroupsComponent},
-                          {path: 'channel', component: ChannelComponent},
+                          {path: 'channel/:group', component: ChannelComponent},
                           {path: 'chat', component: ChatComponent},
                           {path: 'profile', component: ProfileComponent},
                           {path: 'user', component: UserComponent}
