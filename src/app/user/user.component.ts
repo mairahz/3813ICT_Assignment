@@ -17,7 +17,9 @@ export class UserComponent implements OnInit {
   username: string = "";
   email: string = "";
   upwd: string = "";
-  user: {};
+  user;
+  newUsr: {};
+  groups;
   currName: string = "";
   super: boolean = false;
   group: boolean = false;
@@ -28,8 +30,9 @@ export class UserComponent implements OnInit {
       this.router.navigate(['login']);
     }
     this.users = JSON.parse(localStorage.getItem("users"));
+    this.user = JSON.parse(localStorage.getItem("user"));
     this.currName = localStorage.getItem("username");
-    
+    this.groups = this.user.adminGroupList;
    }
 
   ngOnInit() {
@@ -39,6 +42,7 @@ export class UserComponent implements OnInit {
   private onClickUser() {
     this.new = true;
   }
+
   private userCreate(){
     if(!this.username){
       alert("Please enter a username.")
@@ -59,11 +63,11 @@ export class UserComponent implements OnInit {
           this.group = true;
         }
         if(this.group){
-          this.user = {username: this.username, email: this.email, password: this.upwd, super: this.super, group: this.group, groupList:[]}
+          this.newUsr = {username: this.username, email: this.email, password: this.upwd, super: this.super, group: this.group, groupList:[]}
         } else {
-          this.user = {username: this.username, email: this.email, password: this.upwd, super: this.super, group: this.group, groupList:[], adminGroupList:[]}
+          this.newUsr = {username: this.username, email: this.email, password: this.upwd, super: this.super, group: this.group, groupList:[], adminGroupList:[]}
         }
-        this.users.push(this.user);
+        this.users.push(this.newUsr);
         localStorage.setItem("users", JSON.stringify(this.users));
         this.service.sendData(this.users);
         this.username = "";
@@ -97,4 +101,16 @@ export class UserComponent implements OnInit {
     this.group = false;
     this.new = false;
   }
+
+  private addGroup(group, user){
+    for(let i=0; i<=this.users.length; i++){
+      if(user == this.users[i].username){
+        this.users[i].groupList.push(group);
+        break;
+      }
+    }
+    localStorage.setItem("users", JSON.stringify(this.users));
+    this.service.sendData(this.users);
+  }
+
 }
