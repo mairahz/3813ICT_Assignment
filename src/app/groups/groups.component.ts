@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from '../services/user.service';
+import { GroupService } from '../services/group.service';
 
 @Component({
   selector: 'app-groups',
@@ -9,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class GroupsComponent implements OnInit {
 
-  groups: string[] = [];
+  groups;
   adminGroups: string[] = [];
   newGroup: boolean = false;
   name: string = "";
@@ -19,14 +20,16 @@ export class GroupsComponent implements OnInit {
   valid: string = "";
   
 
-  constructor(private router: Router, private service: UserService) {
+  constructor(private router: Router, private service: UserService, private groupService: GroupService) {
     this.valid = localStorage.getItem("valid");
     if(this.valid != "true"){
       this.router.navigate(['login']);
     }
+    this.groupService.getGroups()
+      .subscribe((data) => this.groups = data);
     this.user = JSON.parse(localStorage.getItem("user"));
     this.users = JSON.parse(localStorage.getItem("users"));
-    this.groups = this.user.groupList;
+    // this.groups = this.user.groupList;
     this.adminGroups = JSON.parse(localStorage.getItem("adminGroupList"));
    }
 
@@ -64,7 +67,7 @@ export class GroupsComponent implements OnInit {
 
   private groupDelete(group: string){
     for(let i=0; i<= this.users.length; i++){
-      if(this.users[i].username == this.user.username){
+    //   if(this.users[i].username == this.user.username){
         for(let j=0; j<=this.user.groupList.length; j++){
           if(this.user.groupList[j].name == group){
             this.user.groupList.splice(j, 1);
@@ -80,7 +83,7 @@ export class GroupsComponent implements OnInit {
         localStorage.setItem("user", JSON.stringify(this.user));
         this.users[i] = this.user;
         break;
-      }
+    //   }
     }
     localStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);

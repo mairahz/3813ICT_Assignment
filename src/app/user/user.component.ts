@@ -102,15 +102,16 @@ export class UserComponent implements OnInit {
   }
 
   private addGroup(group, user){
-    console.log(group)
     group.users.push(user);
     for(let i=0; i<this.users.length; i++){
       if(this.users[i].groupList.length == 0){
         this.users[i].groupList.push(group)
       } else {
-        for(let j=0; j<=this.users[i].groupList.length; j++){
-          if(group.name == this.users[i].adminGroupList[j].name){
-            this.users[i].adminGroupList[j] = group;
+        for(let j=0; j<this.users[i].groupList.length; j++){
+          if(this.users[i].adminGroupList.length != 0){
+            if(group.name == this.users[i].adminGroupList[j].name){
+              this.users[i].adminGroupList[j] = group;
+            }
           }
           if(group.name == this.users[i].groupList[j].name){
             this.users[i].groupList[j] = group;
