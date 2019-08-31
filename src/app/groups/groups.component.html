@@ -4,14 +4,9 @@
       <h3 class="py-3">Groups</h3>
     </div>
     <div class="col-sm-2">
-      <button type="button" class="btn btn-success my-3" (click)="onClickGroup()" >Create new group</button>
+      <button type="button" class="btn btn-success my-3" *ngIf="user.group == true" (click)="onClickGroup()" >Create new group</button>
     </div>
   </div>
-  <!-- <div class="inbox_chat" *ngIf="!newGroup">
-    <ul class="list-group btn-group">
-      <li class="list-group-item d-flex list-group-item-action" *ngFor="let group of groups" (click)="onSelect(group)">{{group}}</li>
-    </ul> -->
-  <!-- </div> -->
   <div class="panel-group" *ngIf="!newGroup">
       <div class="panel panel-default" *ngFor="let group of groups">
         <div class="panel-heading list-group">
@@ -27,15 +22,15 @@
             </li>
           </ul>
           <div class="panel-footer btn-group list-group-item">
-            <button type="button" class="btn btn-danger btn-sm" (click)="groupDelete(group.name)">Delete {{group.name}}</button>
-            <button type="button" class="btn btn-success btn-sm" (click)="channelCreate(group.name)">Create new Channel</button>
+            <button type="button" class="btn btn-danger btn-sm" *ngIf="user.group == true" (click)="groupDelete(group.name)">Delete {{group.name}}</button>
+            <button type="button" class="btn btn-success btn-sm" *ngIf="user.group == true" (click)="channelCreate(group.name)">Create new Channel</button>
           </div>
         </div>
       </div>
     </div>
 
   <ng-template #elseBlock>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" *ngIf="user.group == true">
       <div class="col-md-4 col-md-offset-4">
         <h2 class="py-3">Create a new group</h2>
         <form id="loginform">
