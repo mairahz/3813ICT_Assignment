@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from '../services/user.service';
-import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -17,22 +16,23 @@ export class UserComponent implements OnInit {
   username: string = "";
   email: string = "";
   upwd: string = "";
+  newUsr;
   user;
-  newUsr: {};
-  groups;
   currName: string = "";
   super: boolean = false;
   group: boolean = false;
+  groups;
 
   constructor(private router: Router, private service: UserService) {
     this.valid = localStorage.getItem("valid");
     if(this.valid != "true"){
       this.router.navigate(['login']);
     }
-    this.users = JSON.parse(localStorage.getItem("users"));
     this.user = JSON.parse(localStorage.getItem("user"));
+    this.users = JSON.parse(localStorage.getItem("users"));
     this.currName = localStorage.getItem("username");
     this.groups = this.user.adminGroupList;
+    
    }
 
   ngOnInit() {
@@ -42,7 +42,6 @@ export class UserComponent implements OnInit {
   private onClickUser() {
     this.new = true;
   }
-
   private userCreate(){
     if(!this.username){
       alert("Please enter a username.")
@@ -103,11 +102,23 @@ export class UserComponent implements OnInit {
   }
 
   private addGroup(group, user){
-    for(let i=0; i<=this.users.length; i++){
-      if(user == this.users[i].username){
-        this.users[i].groupList.push(group);
-        break;
+    console.log(group)
+    group.users.push(user);
+    for(let i=0; i<this.users.length; i++){
+      if(this.users[i].groupList.length == 0){
+        this.users[i].groupList.push(group)
+      } else {
+        for(let j=0; j<=this.users[i].groupList.length; j++){
+          if(group.name == this.users[i].adminGroupList[j].name){
+            this.users[i].adminGroupList[j] = group;
+          }
+          if(group.name == this.users[i].groupList[j].name){
+            this.users[i].groupList[j] = group;
+            break;
+          }
+        }
       }
+      
     }
     localStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);
