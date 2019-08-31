@@ -103,25 +103,12 @@ export class UserComponent implements OnInit {
   }
 
   private addGroup(group, user){
-    group.users.push(user);
-    for(let i=0; i<this.users.length; i++){
-      console.log(this.users[i])
-      if(this.users[i].groupList.length == 0){
-        this.users[i].groupList.push(group)
-      } else {
-        for(let j=0; j<=this.users[i].groupList.length; j++){
-          if(group.name == this.users[i].adminGroupList[j].name){
-            this.users[i].adminGroupList[j] = group;
-          }
-          if(group.name == this.users[i].groupList[j].name){
-            this.users[i].groupList[j] = group;
-            break;
-          }
-        }
+    for(let i=0; i<=this.users.length; i++){
+      if(user == this.users[i].username){
+        this.users[i].groupList.push(group);
+        break;
       }
-      
     }
-    console.log(this.users);
     localStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);
   }

@@ -43,8 +43,8 @@ export class GroupsComponent implements OnInit {
 
   private groupSubmit(){
     if(this.name){
-      this.user.groupList.push({name: this.name, channels: [], users:[this.user.username]});
-      this.user.adminGroupList.push({name: this.name, channels: [], users:[this.user.username]});
+      this.user.groupList.push({name: this.name, channels: []});
+      this.user.adminGroupList.push({name: this.name, channels: []});
       this.groups = this.user.groupList;
       localStorage.setItem("user", JSON.stringify(this.user));
       for(let i=0; i<=this.users.length; i++){
