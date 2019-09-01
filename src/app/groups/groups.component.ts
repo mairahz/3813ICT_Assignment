@@ -84,9 +84,9 @@ export class GroupsComponent implements OnInit {
     this.service.deleteGroup(group);
   }
 
-  // private channelCreate(group){
-  //   this.router.navigate(['channel', group]);
-  // }
+  private channelCreate(group){
+    this.router.navigate(['channel', group]);
+  }
 
   // private channelDelete(channel, group){
   //   for(let i=0; i<=this.user.groupList.length; i++){
