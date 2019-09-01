@@ -117,4 +117,8 @@ export class GroupsComponent implements OnInit {
     this.router.navigate(['chat', group, channel]);
   }
 
+  private onClickSettings(group){
+    this.router.navigate(['settings', group])
+  }
+
 }
