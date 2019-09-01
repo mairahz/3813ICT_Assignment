@@ -3,11 +3,11 @@
         <div class="col-md-8 col-md-offset-4"  *ngIf="!new; else elseBlock">
             <h1 class="text-center py-3 px-lg-5">User List</h1>
             <button type="button" class="btn btn-success my-3" (click)="onClickUser()" >Create new user</button>
-            <ul class="list-group btn-group" *ngFor="let user of users">
-                <li class="list-group-item d-flex justify-content-between" *ngIf="user.username == currName">
+            <ul class="list-group btn-group" *ngFor="let usr of users">
+                <li class="list-group-item d-flex justify-content-between" *ngIf="usr.username == user.username">
                     <p class="p-0 m-0 flex-grow-1">{{user.username}} (You)</p>
                 </li>
-                <li class="list-group-item d-flex justify-content-between" *ngIf="user.username != currName">
+                <li class="list-group-item d-flex justify-content-between" *ngIf="usr.username != user.username">
                     <p class="p-0 m-0 flex-grow-1">{{user.username}}</p>
                     <div class="btn-group">
                         <div class="dropdown">

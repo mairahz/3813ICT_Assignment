@@ -25,16 +25,16 @@ export class UserComponent implements OnInit {
   newUsr; // Details of new user object
 
   constructor(private router: Router, private service: UserService) {
-    this.user = JSON.parse(localStorage.getItem("user"));
-    this.new = false;
     this.valid = JSON.parse(localStorage.getItem("valid"));
     if(!this.valid){
       this.router.navigate(['login']);
     }
-    this.users = JSON.parse(localStorage.getItem("users"));
    }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.users = JSON.parse(localStorage.getItem("users"));
+    this.new = false;
   }
 
   /**
