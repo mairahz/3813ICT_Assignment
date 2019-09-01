@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from '../services/user.service';
-import { GroupService } from '../services/group.service';
 
 @Component({
   selector: 'app-groups',
@@ -9,29 +8,27 @@ import { GroupService } from '../services/group.service';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
-
-  group;
+  user; // Current user
+  // users; // List of users
+  valid: boolean = false; 
 
   newGroup: boolean = false;
+  group = {}; 
   name: string = "";
-  user;
-  users;
   selectedGroup: string = "";
-  valid: string = "";
   
 
   constructor(private router: Router, private service: UserService) {
-    this.valid = localStorage.getItem("valid");
-    if(this.valid != "true"){
+    this.valid = JSON.parse(localStorage.getItem("valid"));
+    if(!this.valid){
       this.router.navigate(['login']);
     }
-    this.user = JSON.parse(localStorage.getItem("user"));
-    this.users = JSON.parse(localStorage.getItem("users"));
-    // this.groups = this.user.groupList;
-    // this.adminGroups = JSON.parse(localStorage.getItem("adminGroupList"));
    }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    // this.users = JSON.parse(localStorage.getItem("users"));
+    this.newGroup = false;
   }
 
   /**
@@ -51,80 +48,70 @@ export class GroupsComponent implements OnInit {
    */
   private groupSubmit(){
     if(this.name){
-      this.user.groupList.push(this.name);
-      this.user.adminGroupList.push(this.name);
-      this.group = {name: this.name, channels: [], users: [this.user.username]};
+      this.user.groupList.push({name: this.name, channels: []});
+      this.user.adminGroupList.push({name: this.name, channels: []});
+
       localStorage.setItem("user", JSON.stringify(this.user));
-      for(let i=0; i<=this.users.length; i++){
-        if(this.user.username == this.users[i].username){
-          this.users[i] = this.user;
-          break;
-        }
-      }
-      localStorage.setItem("users", JSON.stringify(this.users));
-      // this.service.sendData(this.users);
-      this.service.sendGroup(this.group);
-      this.newGroup = false;
+      this.service.changeUserDetail(this.user);
       this.name = "";
+      this.newGroup = false;
     } else {
       alert("Please enter a group name.");
     }
   }
 
+  /**
+   * Deletes the group.
+   * @param group - name of group to be deleted.
+   */
   private groupDelete(group: string){
-    for(let i=0; i<= this.users.length; i++){
-    //   if(this.users[i].username == this.user.username){
-        for(let j=0; j<=this.user.groupList.length; j++){
-          if(this.user.groupList[j].name == group){
-            this.user.groupList.splice(j, 1);
-            for(let k=0; k<=this.user.adminGroupList.length; k++){
-              if(this.user.adminGroupList[k].name == group){
-                this.user.adminGroupList.splice(k, 1)
-                break;
-              }
-            }
-            break;
-          }
+    if(this.user.group){
+      for(let i=0; i<=this.user.adminGroupList.length; i++){
+        if(group == this.user.adminGroupList[i].name){
+          this.user.adminGroupList.splice(i, 1);
         }
-        localStorage.setItem("user", JSON.stringify(this.user));
-        this.users[i] = this.user;
-        break;
-    //   }
+      }
     }
-    localStorage.setItem("users", JSON.stringify(this.users));
-    this.service.sendData(this.users);
-  }
 
-  private channelCreate(group){
-    this.router.navigate(['channel', group]);
-  }
-
-  private channelDelete(channel, group){
     for(let i=0; i<=this.user.groupList.length; i++){
       if(group == this.user.groupList[i].name){
-        for(let j=0; j<=this.user.groupList[i].channels.length; j++){
-          if(channel == this.user.groupList[i].channels[j]){
-            this.user.groupList[i].channels.splice(j, 1);
-            break;
-          }
-        }
-        break;
+        this.user.groupList.splice(i, 1);
       }
     }
-    
-    for(let i=0; i<=this.users.length; i++){
-      if(this.user.username == this.users[i].username){
-        localStorage.setItem("user", JSON.stringify(this.user));
-        this.users[i] = this.user;
-        break;
-      }
-    }
-    localStorage.setItem("users", JSON.stringify(this.users));
-    this.service.sendData(this.users);
+    localStorage.setItem("user", JSON.stringify(this.user));
+    this.service.deleteGroup(group);
   }
 
-  private onClickChannel(channel){
-    this.router.navigate(['chat', channel]);
-  }
+  // private channelCreate(group){
+  //   this.router.navigate(['channel', group]);
+  // }
+
+  // private channelDelete(channel, group){
+  //   for(let i=0; i<=this.user.groupList.length; i++){
+  //     if(group == this.user.groupList[i].name){
+  //       for(let j=0; j<=this.user.groupList[i].channels.length; j++){
+  //         if(channel == this.user.groupList[i].channels[j]){
+  //           this.user.groupList[i].channels.splice(j, 1);
+  //           break;
+  //         }
+  //       }
+  //       break;
+  //     }
+  //   }
+    
+  //   for(let i=0; i<=this.users.length; i++){
+  //     if(this.user.username == this.users[i].username){
+  //       localStorage.setItem("user", JSON.stringify(this.user));
+  //       this.users[i] = this.user;
+  //       break;
+  //     }
+  //   }
+  //   localStorage.setItem("users", JSON.stringify(this.users));
+  //   this.service.sendData(this.users);
+  // }
+
+  // private onClickChannel(channel){
+  //   this.router.navigate(['chat', channel]);
+  // }
 
 }

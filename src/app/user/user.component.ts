@@ -34,6 +34,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.users = JSON.parse(localStorage.getItem("users"));
+    console.log(this.users)
     this.new = false;
   }
 
