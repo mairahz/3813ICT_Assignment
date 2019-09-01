@@ -35,4 +35,17 @@ export class UserService {
       this.sendDataSubject.next(data);
     });
   }
+
+  sendGroup(data) {
+    const headers = new HttpHeaders()
+          .set('Authorization', 'my-auth-token')
+          .set('Content-Type', 'application/json');
+
+    this.http.post('http://localhost:3000/api/group', JSON.stringify(data), {
+      headers: headers
+    })
+    .subscribe(data => {
+      this.sendDataSubject.next(data);
+    });
+  }
 }

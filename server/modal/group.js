@@ -9,27 +9,8 @@ class Group {
         this.users.push(user);
     }
 
-    check() {
-        this.users = JSON.parse(fs.readFileSync(file).toString());
-        for(let i = 0; i<this.users.length; i++){
-            console.log(this.users[i].username)
-            if(this.users[i].username == this.username && this.users[i].password == this.upwd) {
-                this.valid = true;
-                this.user = this.users[i];
-                console.log(this.user)
-                break;
-            }
-        }
-
-        if(this.valid == true){
-            return {user: this.user, valid: this.valid, usersList: this.users};
-        } else {
-            return({error: "error", valid: this.valid});
-        }
-    }
-
-    add(user) {
-        fs.writeFile(file, user, function(err) { 
+    add(group) {
+        fs.writeFile(file, group, function(err) { 
             if(err){
                 console.log(err);
             } else {

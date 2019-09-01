@@ -1,1 +1,1 @@
-[{"username":"super","email":"super@com.au","password":"super","super":true,"group":true,"groupList":[],"adminGroupList":[]}]
+[{"username":"super","email":"super@com.au","password":"super","super":true,"group":true,"groupList":["Meow","Moo"],"adminGroupList":["Meow","Moo"]}]

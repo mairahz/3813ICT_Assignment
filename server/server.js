@@ -46,3 +46,10 @@ app.post('/api/user', function(req, res){
     user.add(data);
     res.send(data);
 });
+
+app.post('/api/group', function(req, res){
+    if (!req.body){
+        return res.endStatus(400);
+    }
+    console.log(req.body);
+})
