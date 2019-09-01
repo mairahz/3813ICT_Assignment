@@ -80,11 +80,19 @@ export class GroupsComponent implements OnInit {
     localStorage.setItem("user", JSON.stringify(this.user));
     this.service.deleteGroup(group);
   }
-
+  /**
+   * Navigate to change channel form.
+   * @param group - Name of group
+   */
   private channelCreate(group){
     this.router.navigate(['channel', group]);
   }
 
+  /**
+   * Delete channel
+   * @param channel - Name of channel to be deleted
+   * @param group - group name that the channel is in
+   */
   private channelDelete(channel, group){
     let i = this.groupList.findIndex(groupItem =>
       groupItem.name == group);
@@ -101,8 +109,12 @@ export class GroupsComponent implements OnInit {
     this.service.changeUserDetail(this.user);
   }
 
-  private onClickChannel(channel){
-    this.router.navigate(['chat', channel]);
+  /**
+   * Navigate to chatroom of channel
+   * @param channel - Name of channel to go to
+   */
+  private onClickChannel(group, channel){
+    this.router.navigate(['chat', group, channel]);
   }
 
 }
