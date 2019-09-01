@@ -46,6 +46,29 @@ export class UserService {
     this.sendData(this.users);
   }
 
+  deleteChannel(group, channel){
+    this.users = JSON.parse(localStorage.getItem("users"));
+    // for(let i=0; i<=this.users.length; i++){
+    //   if(this.users[i].groupList.length == 0){
+    //     continue;
+    //   } else {
+    //     let l = this.users[i].groupList.findIndex(groupItem =>
+    //       groupItem.name == group);
+    //     for(let k=0; k<this.users[i].groupList[l].channels.length; k++){
+    //       if(this.users[i].groupList[l].channels[k] == channel){
+    //         this.users[i].groupList[l].channels.splice(k, 1);
+    //         break;
+    //       }
+    //     }
+    //     let j = this.users[i].adminGroupList.findIndex(groupItem =>
+    //       groupItem.name == group);
+    //     this.users[i].adminGroupList[j] = this.users[i].groupList[l];
+    //   }
+  
+    // }
+    this.sendData(this.users);
+  }
+
   /**
    * Looks for matching username in the user list. 
    * Changes details of that user.

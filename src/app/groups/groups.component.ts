@@ -9,6 +9,8 @@ import { UserService } from '../services/user.service';
 })
 export class GroupsComponent implements OnInit {
   user; // Current user
+  groupList; // Current User's Grouplist
+  adGroupList // Current User's Admin Grouplist
   // users; // List of users
   valid: boolean = false; 
 
@@ -27,6 +29,8 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user"));
+    this.groupList = this.user.groupList;
+    this.adGroupList = this.user.adminGroupList;
     // this.users = JSON.parse(localStorage.getItem("users"));
     this.newGroup = false;
   }
@@ -48,8 +52,8 @@ export class GroupsComponent implements OnInit {
    */
   private groupSubmit(){
     if(this.name){
-      this.user.groupList.push({name: this.name, channels: []});
-      this.user.adminGroupList.push({name: this.name, channels: []});
+      this.groupList.push({name: this.name, channels: []});
+      this.adGroupList.push({name: this.name, channels: []});
 
       localStorage.setItem("user", JSON.stringify(this.user));
       this.service.changeUserDetail(this.user);
@@ -65,21 +69,14 @@ export class GroupsComponent implements OnInit {
    * @param group - name of group to be deleted.
    */
   private groupDelete(group: string){
-    if(this.user.group){
-      for(let i=0; i<=this.user.adminGroupList.length; i++){
-        if(group == this.user.adminGroupList[i].name){
-          this.user.adminGroupList.splice(i, 1);
-          break;
-        }
-      }
-    }
+    let i = this.adGroupList.findIndex(groupItem =>
+      groupItem.name == group);
+    this.adGroupList.splice(i, 1);
 
-    for(let i=0; i<=this.user.groupList.length; i++){
-      if(group == this.user.groupList[i].name){
-        this.user.groupList.splice(i, 1);
-        break;
-      }
-    }
+    i = this.groupList.findIndex(groupItem =>
+      groupItem.name == group);
+    this.groupList.splice(i, 1);
+
     localStorage.setItem("user", JSON.stringify(this.user));
     this.service.deleteGroup(group);
   }
@@ -88,32 +85,24 @@ export class GroupsComponent implements OnInit {
     this.router.navigate(['channel', group]);
   }
 
-  // private channelDelete(channel, group){
-  //   for(let i=0; i<=this.user.groupList.length; i++){
-  //     if(group == this.user.groupList[i].name){
-  //       for(let j=0; j<=this.user.groupList[i].channels.length; j++){
-  //         if(channel == this.user.groupList[i].channels[j]){
-  //           this.user.groupList[i].channels.splice(j, 1);
-  //           break;
-  //         }
-  //       }
-  //       break;
-  //     }
-  //   }
-    
-  //   for(let i=0; i<=this.users.length; i++){
-  //     if(this.user.username == this.users[i].username){
-  //       localStorage.setItem("user", JSON.stringify(this.user));
-  //       this.users[i] = this.user;
-  //       break;
-  //     }
-  //   }
-  //   localStorage.setItem("users", JSON.stringify(this.users));
-  //   this.service.sendData(this.users);
-  // }
+  private channelDelete(channel, group){
+    let i = this.groupList.findIndex(groupItem =>
+      groupItem.name == group);
+    let k = this.groupList[i].channels.findIndex(chan =>
+      chan == channel);
+    this.groupList[i].channels.splice(k, 1);
 
-  // private onClickChannel(channel){
-  //   this.router.navigate(['chat', channel]);
-  // }
+    let j = this.adGroupList.findIndex(groupItem =>
+      groupItem.name == group);
+    this.adGroupList[j] = this.groupList[i];
+    
+    localStorage.setItem("user", JSON.stringify(this.user));
+    // this.service.deleteChannel(group, channel);
+    this.service.changeUserDetail(this.user);
+  }
+
+  private onClickChannel(channel){
+    this.router.navigate(['chat', channel]);
+  }
 
 }
