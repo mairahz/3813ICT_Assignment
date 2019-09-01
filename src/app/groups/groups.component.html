@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="panel-group" *ngIf="!newGroup">
-      <div class="panel panel-default" *ngFor="let group of groups">
+      <div class="panel panel-default" *ngFor="let group of this.user.groupList">
         <div class="panel-heading list-group">
           <h4 class="list-group">
             <a data-toggle="collapse" class="list-group-item list-group-item-info list-group-item-action" href="#{{group.name}}">{{group.name}}</a> 

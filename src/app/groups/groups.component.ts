@@ -69,6 +69,7 @@ export class GroupsComponent implements OnInit {
       for(let i=0; i<=this.user.adminGroupList.length; i++){
         if(group == this.user.adminGroupList[i].name){
           this.user.adminGroupList.splice(i, 1);
+          break;
         }
       }
     }
@@ -76,6 +77,7 @@ export class GroupsComponent implements OnInit {
     for(let i=0; i<=this.user.groupList.length; i++){
       if(group == this.user.groupList[i].name){
         this.user.groupList.splice(i, 1);
+        break;
       }
     }
     localStorage.setItem("user", JSON.stringify(this.user));

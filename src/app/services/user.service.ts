@@ -15,7 +15,6 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { 
     this.sendData$ = this.sendDataSubject.asObservable();
-    this.users = JSON.parse(localStorage.getItem("users"));
   }
 
   /**
@@ -23,7 +22,11 @@ export class UserService {
    * @param group - group name to be deleted.
    */
   deleteGroup(group){
+    this.users = JSON.parse(localStorage.getItem("users"));
     for(let i=0; i<=this.users.length; i++){
+      if(this.users[i].groupList.length == 0){
+        break;
+      }
       if(this.users[i].group){
         for(let j=0; j<=this.users[i].adminGroupList.length; j++){
           if(this.users[i].adminGroupList[j].name == group){
@@ -55,6 +58,7 @@ export class UserService {
         break;
       }
     }
+    localStorage.setItem("users", JSON.stringify(this.users));
     this.sendData(this.users);
   }
 
@@ -71,7 +75,6 @@ export class UserService {
       headers: headers
     })
     .subscribe(data => {
-      console.log('sendData ' + data);
       // this.data = data;
       // if(this.data.valid){
       //   this.router.navigate(['/user']);
