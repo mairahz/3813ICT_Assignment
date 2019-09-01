@@ -17,11 +17,6 @@ export class UserService {
     this.sendData$ = this.sendDataSubject.asObservable();
   }
 
-  setDetail(key, detail){
-    this.userDetails[key] = detail;
-    console.log('setDetail ' + this.userDetails);
-  }
-
   /**
    *  Send user data to the server.
    * @param data - User details
