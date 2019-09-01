@@ -7,36 +7,47 @@ import { Router } from "@angular/router";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  user; // Current user
+  valid; // Current validity of user
+
   username = "";
   email = "";
-  valid="";
-  editmode=false;
+  editmode = false; // Check if page is in edit mode.
 
   constructor(private router: Router) {
-    this.valid = localStorage.getItem("valid");
-    if(this.valid != "true"){
+    this.valid = JSON.parse(localStorage.getItem("valid"));
+    if(!this.valid){
       this.router.navigate(['login']);
     }
   }
 
   ngOnInit() {
-    this.username = localStorage.getItem("username");
-    this.email = localStorage.getItem("email");
+    this.user = JSON.parse(localStorage.getItem("user"));
   } 
 
+  /**
+   * Toggle to turn on edit mode.
+   */
   onClickEdit(){
     this.editmode = true;
   };
 
+  /**
+   * When cancel is pressed, sets the local storage back to previous data.
+   */
   onClickCancel(){
     this.username = localStorage.getItem("username");
     this.email = localStorage.getItem("email");
     this.editmode = false;
   }
 
+  /**
+   * Saves data to local storage.
+   */
   saveChanges(){
-    localStorage.setItem("username", this.username);
-    localStorage.setItem("email", this.email);
+    this.user.username = this.username;
+    this.user.email = this.email;
+    localStorage.setItem("user", this.user);
     this.editmode = false;
   };
 
