@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   username = "";
   upwd = "";
-  public user = {};
+  user = {username: "", upwd: ""};
 
   constructor(private service: LoginService) { }
 
@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
 
   itemSubmit() {
     this.user = { username: this.username, upwd: this.upwd};
+    this.service.setDetail('username', this.username);
+    console.log(this.service.getDetail('username'))
     this.service.sendData(this.user);
   };
 

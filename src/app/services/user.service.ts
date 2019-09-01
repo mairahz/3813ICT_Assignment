@@ -10,12 +10,22 @@ import { Router } from "@angular/router";
 export class UserService {
   sendData$: Observable<any>;
   private sendDataSubject = new Subject<any>();
+  userDetails = {username: '', email: '', password: '', super: false, group: false, groupList: [], adminGroupList: []};
   // public data: any;
 
   constructor(private http: HttpClient, private router: Router) { 
     this.sendData$ = this.sendDataSubject.asObservable();
   }
 
+  setDetail(key, detail){
+    this.userDetails[key] = detail;
+    console.log('setDetail ' + this.userDetails);
+  }
+
+  /**
+   *  Send user data to the server.
+   * @param data - User details
+   */
   sendData(data) {
     const headers = new HttpHeaders()
           .set('Authorization', 'my-auth-token')
@@ -25,7 +35,7 @@ export class UserService {
       headers: headers
     })
     .subscribe(data => {
-      
+      console.log('sendData ' + data);
       // this.data = data;
       // if(this.data.valid){
       //   this.router.navigate(['/user']);

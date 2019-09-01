@@ -28,7 +28,10 @@ app.all("/*", function(req, res, next){
     next();
   });
 
-app.post('/login/api/login', function(req, res){
+  /**
+   * Route to post user details to check in file.
+   */
+app.post('/api/login', function(req, res){
     if (!req.body){
         return res.endStatus(400);
     }
@@ -37,6 +40,9 @@ app.post('/login/api/login', function(req, res){
     res.send(valid);
 });
 
+/**
+ * Route to add new user
+ */
 app.post('/api/user', function(req, res){
     if (!req.body){
         return res.endStatus(400);
@@ -51,5 +57,5 @@ app.post('/api/group', function(req, res){
     if (!req.body){
         return res.endStatus(400);
     }
-    console.log(req.body);
+    // console.log(req.body);
 })

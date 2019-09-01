@@ -30,10 +30,6 @@ export class AppComponent {
     if (typeof(Storage) !== "undefined") {
       if(user.valid){
         localStorage.setItem("user", JSON.stringify(user.user));
-        localStorage.setItem("username", user.user.username);
-        localStorage.setItem("email", user.user.email);
-        localStorage.setItem("super", user.user.super);
-        localStorage.setItem("group", user.user.group);
         localStorage.setItem("groupList", JSON.stringify(user.user.groupList));
         if(user.user.group){
           localStorage.setItem("adminGroupList", JSON.stringify(user.user.adminGroupList));

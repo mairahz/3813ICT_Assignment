@@ -21,7 +21,7 @@ export class LoginService {
           .set('Authorization', 'my-auth-token')
           .set('Content-Type', 'application/json');
 
-    this.http.post('http://localhost:3000/login/api/login', JSON.stringify(data), {
+    this.http.post('http://localhost:3000/api/login', JSON.stringify(data), {
       headers: headers
     })
     .subscribe(data => {

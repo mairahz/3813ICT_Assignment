@@ -16,11 +16,11 @@ class User {
     check() {
         this.users = JSON.parse(fs.readFileSync(file).toString());
         for(let i = 0; i<this.users.length; i++){
-            console.log(this.users[i].username)
+            // console.log(this.users[i].username)
             if(this.users[i].username == this.username && this.users[i].password == this.upwd) {
                 this.valid = true;
                 this.user = this.users[i];
-                console.log(this.user)
+                // console.log(this.user)
                 break;
             }
         }
