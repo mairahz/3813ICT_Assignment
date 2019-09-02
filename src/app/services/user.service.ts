@@ -17,6 +17,22 @@ export class UserService {
     this.sendData$ = this.sendDataSubject.asObservable();
   }
 
+  notInGroup(groupName){
+    let notInGroup =[];
+    for(let i=0; i<this.users.length; i++){
+      if(this.users[i].groupList.length == 0){
+        notInGroup.push(this.users[i]);
+      } else {
+        let j = this.users[i].groupList.findIndex(group =>
+          group.name == groupName);
+        if(j == -1){
+          notInGroup.push(this.users[i]);
+        }
+      }
+    }
+    return(notInGroup);
+  }
+
   /**
    * Look for matching group name in all user list and deletes the group
    * @param group - group name to be deleted.

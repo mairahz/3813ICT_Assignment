@@ -25,19 +25,15 @@ export class SettingsComponent implements OnInit {
     this.groupName = this.route.snapshot.params['group'];
     this.user = JSON.parse(localStorage.getItem("user"));
     this.users = JSON.parse(localStorage.getItem("users"));
-    for(let i=0; i<this.users.length; i++){
-      if(this.users[i].groupList.length == 0){
-        console.log(this.user)
-        this.notInGroup.push(this.users[i]);
-      } else {
-        let j = this.users[i].groupList.findIndex(group =>
-          group.name == this.groupName);
-        if(j == -1){
-          this.notInGroup.push(this.users[i]);
-        }
-      }
-      console.log(this.notInGroup) 
-    }
+    this.notInGroup = this.service.notInGroup(this.groupName);
   }
 
+  onAdd(usr){
+    usr.groupList.push({name: this.groupName, channels: []});
+    this.service.changeUserDetail(usr);
+    let i = this.notInGroup.findIndex(use =>
+      use.name == usr.name);
+    this.notInGroup.splice(i, 1);
+    alert("User has been added to the group.")
+  }
 }

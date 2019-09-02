@@ -6,8 +6,8 @@
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Add user to {{groupName}}
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngFor="let usr of this.notInGroup">
-                    <a class="dropdown-item" href="#">{{usr.username}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                    <a class="dropdown-item" (click)="onAdd(usr)" *ngFor="let usr of this.notInGroup">{{usr.username}}</a>
                 </div>
             </div>
             

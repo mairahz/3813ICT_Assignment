@@ -94,6 +94,7 @@ export class UserComponent implements OnInit {
         this.users.push(this.newUsr);
         localStorage.setItem("users", JSON.stringify(this.users));
         this.service.sendData(this.users);
+        alert("User has been created.")
         this.onClickCancel();
       } else {
         alert("Sorry, this username is taken. Please try a new one.")
