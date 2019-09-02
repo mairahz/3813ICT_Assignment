@@ -109,11 +109,11 @@ export class UserComponent implements OnInit {
   private userDelete(username){
     for(let i=0; i<= this.users.length; i++){
       if(this.users[i].username == username){
-        console.log(this.users[i].username)
         this.users.splice(i, 1);
         break;
       }
     }
+    localStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);
   }
 
