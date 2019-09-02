@@ -28,6 +28,9 @@ export class ChannelComponent implements OnInit {
     this.groupName = this.route.snapshot.params['group'];
   }
 
+  /**
+   * Function that creates a channel for a group.
+   */
   private channelSubmit(){
     for(let i=0; i<=this.user.groupList.length; i++){
       if(this.user.groupList[i].name == this.groupName){
@@ -39,7 +42,6 @@ export class ChannelComponent implements OnInit {
         break;
       }
     }
-    console.log(this.user)
     this.service.adminChannelAdd(this.name, this.groupName);
     localStorage.setItem("user", JSON.stringify(this.user));
     localStorage.setItem("users", JSON.stringify(this.users));

@@ -37,6 +37,9 @@ export class ChatComponent implements OnInit {
     this.ChannelSort();
   }
 
+  /**
+   * Function for sending the messages to the server.
+   */
   private initIoConnection(){
     this.socketService.initSocket();
     this.ioConnection = this.socketService.onMessage()
@@ -46,6 +49,9 @@ export class ChatComponent implements OnInit {
       });
   }
 
+  /**
+   * Function for when the message is to be sent.
+   */
   private chat(){
     if(this.messagecontent){
       // Check there is a message to send
@@ -56,6 +62,9 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  /**
+   * Makes a list of users that are in the channel.
+   */
   private ChannelSort(){
     for(let i=0; i<this.users.length; i++){
       if(this.users[i].groupList.length != 0){
@@ -71,6 +80,10 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  /**
+   * Removes the selected user from the channel.
+   * @param usr - User to be removed
+   */
   private rmvUser(usr){
     let i = usr.groupList.findIndex(grp =>
       grp.name == this.groupName);

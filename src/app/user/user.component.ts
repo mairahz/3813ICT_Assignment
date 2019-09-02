@@ -117,6 +117,10 @@ export class UserComponent implements OnInit {
     this.service.sendData(this.users);
   }
 
+  /**
+   * Makes a user an admin.
+   * @param usr -User to be made admin
+   */
   private makeAdmin(usr){
     usr.group = true;
     this.service.changeUserDetail(usr);
