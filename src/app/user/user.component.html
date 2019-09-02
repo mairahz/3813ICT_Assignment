@@ -10,6 +10,7 @@
                 <li class="list-group-item d-flex justify-content-between" *ngIf="usr.username != user.username">
                     <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
                     <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="makeAdmin(usr)">Make Admin</button>
                         <button type="button" class="btn btn-danger btn-sm" (click)="userDelete(usr.username)">Delete</button>
                     </div>
                     
