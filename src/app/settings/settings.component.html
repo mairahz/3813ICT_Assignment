@@ -1,28 +1,16 @@
 <div class ="container">
     <div class="row justify-content-center">
         <div class="col-md-8 col-md-offset-4"  *ngIf="!new; else elseBlock">
-            <h1 class="text-center py-3 px-lg-5">User List</h1>
-            <button type="button" class="btn btn-success my-3" (click)="onClickUser()" >Create new user</button>
-            <ul class="list-group btn-group" *ngFor="let usr of users">
-                <li class="list-group-item d-flex justify-content-between" *ngIf="usr.username == user.username">
-                    <p class="p-0 m-0 flex-grow-1">{{user.username}} (You)</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between" *ngIf="usr.username != user.username">
-                    <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
-                    <div class="btn-group">
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Add user to group
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngFor="let group of groups">
-                                <a class="dropdown-item" (click)="addGroup(group, user.username)">{{group.name}}</a>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-danger btn-sm" (click)="userDelete(user.username)">Delete</button>
-                    </div>
-                    
-                </li>
-            </ul>
+            <h1 class="text-center py-3 px-lg-5">Settings for {{groupName}}</h1>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add user to {{groupName}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngFor="let usr of this.notInGroup">
+                    <a class="dropdown-item" href="#">{{usr.username}}</a>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

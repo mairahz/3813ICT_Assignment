@@ -11,7 +11,7 @@ export class GroupsComponent implements OnInit {
   user; // Current user
   groupList; // Current User's Grouplist
   adGroupList // Current User's Admin Grouplist
-  // users; // List of users
+  users; // List of users
   valid: boolean = false; 
 
   newGroup: boolean = false;
@@ -31,7 +31,7 @@ export class GroupsComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.groupList = this.user.groupList;
     this.adGroupList = this.user.adminGroupList;
-    // this.users = JSON.parse(localStorage.getItem("users"));
+    this.users = JSON.parse(localStorage.getItem("users"));
     this.newGroup = false;
   }
 
