@@ -107,6 +107,7 @@ export class SettingsComponent implements OnInit {
     } else {
       usr.adminGroupList[j] = this.user.adminGroupList[i];
     }
+    this.assis.push(usr);
     this.service.changeUserDetail(usr);
   }
 
