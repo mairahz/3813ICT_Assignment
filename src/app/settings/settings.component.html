@@ -4,13 +4,21 @@
             <h1 class="text-center py-3 px-lg-5">Settings for {{groupName}}</h1>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Add user to {{groupName}}
+                    Add User to {{groupName}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                     <a class="dropdown-item" (click)="onAdd(usr)" *ngFor="let usr of this.notInGroup">{{usr.username}}</a>
                 </div>
             </div>
-            
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Remove User from {{groupName}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                    <a class="dropdown-item" (click)="onRemove(usr)" *ngFor="let usr of this.inGroup">{{usr.username}}</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

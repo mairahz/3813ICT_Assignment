@@ -17,7 +17,21 @@ export class UserService {
     this.sendData$ = this.sendDataSubject.asObservable();
   }
 
+  inGroup(groupName){
+    this.users = JSON.parse(localStorage.getItem("users"));
+    let inGroup =[];
+    for(let i=0; i<this.users.length; i++){
+      let j = this.users[i].groupList.findIndex(group =>
+        groupName == group.name);
+      if(j != -1){
+        inGroup.push(this.users[i]);
+      }
+    }
+    return(inGroup);
+  }
+
   notInGroup(groupName){
+    this.users = JSON.parse(localStorage.getItem("users"));
     let notInGroup =[];
     for(let i=0; i<this.users.length; i++){
       if(this.users[i].groupList.length == 0){
@@ -39,7 +53,7 @@ export class UserService {
    */
   deleteGroup(group){
     this.users = JSON.parse(localStorage.getItem("users"));
-    for(let i=0; i<=this.users.length; i++){
+    for(let i=0; i<this.users.length; i++){
       if(this.users[i].groupList.length == 0){
         break;
       }
