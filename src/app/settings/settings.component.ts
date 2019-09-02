@@ -21,11 +21,11 @@ export class SettingsComponent implements OnInit {
     if(!this.valid){
       this.router.navigate(['login']);
     }
+    this.user = JSON.parse(localStorage.getItem("user"));
   }
 
   ngOnInit() {
     this.groupName = this.route.snapshot.params['group'];
-    this.user = JSON.parse(localStorage.getItem("user"));
     this.users = JSON.parse(localStorage.getItem("users"));
     this.notInGroup = this.service.notInGroup(this.groupName);
     this.inGroup = this.service.inGroup(this.groupName);
