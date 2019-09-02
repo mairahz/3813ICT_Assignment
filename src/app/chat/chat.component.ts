@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import { Router, ActivatedRoute } from "@angular/router";
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-chat',
@@ -20,7 +21,7 @@ export class ChatComponent implements OnInit {
   user;
   users;
 
-  constructor(private socketService:SocketService, private router: Router, private route: ActivatedRoute) {
+  constructor(private socketService:SocketService, private router: Router, private route: ActivatedRoute, private service: UserService) {
     this.valid = JSON.parse(localStorage.getItem("valid"));
     if(!this.valid){
       this.router.navigate(['login']);
@@ -67,8 +68,19 @@ export class ChatComponent implements OnInit {
           this.inChannel.push(this.users[i]);
         }
       }
-      
     }
+  }
+
+  private rmvUser(usr){
+    let i = usr.groupList.findIndex(grp =>
+      grp.name == this.groupName);
+    let j = usr.groupList[i].channels.findIndex(channel =>
+      channel == this.channelName);
+    usr.groupList[i].channels.splice(j, 1);
+    let k = this.inChannel.findIndex(user =>
+      user.username == usr.username);
+    this.inChannel.splice(k, 1);
+    this.service.changeUserDetail(usr);
   }
   
 }
