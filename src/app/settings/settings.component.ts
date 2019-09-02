@@ -15,6 +15,8 @@ export class SettingsComponent implements OnInit {
   channels = []; // channels in the group
   notInGroup = []; // users that are not in the group
   inGroup = []; // users that are in the group
+  admins = []; // admins of the group
+  assis = [];
 
   constructor(private route:ActivatedRoute, private router: Router, private service: UserService) { 
     this.valid = JSON.parse(localStorage.getItem("valid"));
@@ -31,7 +33,8 @@ export class SettingsComponent implements OnInit {
     this.inGroup = this.service.inGroup(this.groupName);
     let i = this.user.adminGroupList.findIndex(grp =>
       grp.name == this.groupName);
-    this.channels = this.user.adminGroupList[i].channels
+    this.channels = this.user.adminGroupList[i].channels;
+    this.adminSort();
   }
 
   onAdd(usr){
@@ -60,6 +63,18 @@ export class SettingsComponent implements OnInit {
       grp.name == this.groupName);
     usr.groupList[i].channels.push(channel);
     this.service.changeUserDetail(usr);
+  }
+
+  private adminSort(){
+    for(let i=0; i<this.users.length; i++){
+      let k = this.users[i].adminGroupList.findIndex(grp =>
+        grp.name == this.groupName);
+      if(k != -1 && this.users[i].group){
+        this.admins.push(this.users[i]);
+      } else if(k != -1 && !this.users[i].group){
+        this.assis.push(this.users[i]);
+      }
+    }
   }
 
   
