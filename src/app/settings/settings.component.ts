@@ -77,5 +77,9 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  private onAssis(usr){
+    
+  }
+
   
 }

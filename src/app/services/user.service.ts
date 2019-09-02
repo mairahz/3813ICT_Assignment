@@ -17,7 +17,18 @@ export class UserService {
     this.sendData$ = this.sendDataSubject.asObservable();
   }
 
-  
+  adminChannelAdd(channel, groupName){
+    this.users = JSON.parse(localStorage.getItem("users"));
+    for(let i=0; i<this.users.length; i++){
+      let j = this.users[i].adminGroupList.findIndex(grp =>
+        grp.name == groupName);
+      if(j != -1){
+        this.users[i].adminGroupList[j].channels.push(channel);
+        localStorage.setItem("user", JSON.stringify(this.users[i]));
+      }
+    }
+    this.sendData(this.users);
+  }
 
   inGroup(groupName){
     this.users = JSON.parse(localStorage.getItem("users"));

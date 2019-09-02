@@ -32,22 +32,16 @@ export class ChannelComponent implements OnInit {
     for(let i=0; i<=this.user.groupList.length; i++){
       if(this.user.groupList[i].name == this.groupName){
         this.user.groupList[i].channels.push(this.name);
-        for(let j=0; j<=this.user.adminGroupList.length; j++){
-          if(this.user.adminGroupList[j].name == this.groupName){
-            this.user.adminGroupList[i].channels.push(this.name);
-            break;
-          }
-        }
+        let k = this.user.adminGroupList.findIndex(grp =>
+          grp.name == this.groupName);
+          console.log(this.user.adminGroupList[k] )
+        this.user.adminGroupList[k] = this.user.groupList[i];
         break;
       }
     }
-    for(let i=0; i<=this.users.length; i++){
-      if(this.users[i].username == this.user.username){
-        localStorage.setItem("user", JSON.stringify(this.user));
-        this.users[i] = this.user;
-        break;
-      }
-    }
+    console.log(this.user)
+    this.service.adminChannelAdd(this.name, this.groupName);
+    localStorage.setItem("user", JSON.stringify(this.user));
     localStorage.setItem("users", JSON.stringify(this.users));
     this.service.sendData(this.users);
     this.router.navigate(['']);
