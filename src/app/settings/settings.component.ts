@@ -12,6 +12,7 @@ export class SettingsComponent implements OnInit {
   users;
   user;
   valid;
+  channels = []; // channels in the group
   notInGroup = []; // users that are not in the group
   inGroup = []; // users that are in the group
 
@@ -28,6 +29,9 @@ export class SettingsComponent implements OnInit {
     this.users = JSON.parse(localStorage.getItem("users"));
     this.notInGroup = this.service.notInGroup(this.groupName);
     this.inGroup = this.service.inGroup(this.groupName);
+    let i = this.user.adminGroupList.findIndex(grp =>
+      grp.name == this.groupName);
+    this.channels = this.user.adminGroupList[i].channels
   }
 
   onAdd(usr){
@@ -49,5 +53,9 @@ export class SettingsComponent implements OnInit {
     let j = this.inGroup.findIndex(use =>
        usr.username == use.username);
     this.inGroup.splice(j, 1);
+  }
+
+  onAddChannel(usr){
+
   }
 }

@@ -19,6 +19,29 @@
                     <a class="dropdown-item" (click)="onRemove(usr)" *ngFor="let usr of this.inGroup">{{usr.username}}</a>
                 </div>
             </div>
+            <h4>Users in {{groupName}}</h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between" *ngFor="let usr of this.inGroup">
+                    <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Add User to channel
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                            <a class="dropdown-item" (click)="onAddChannel(usr, channel)" *ngFor="let channel of this.channels">{{channel}}</a>
+                        </div>
+                    </div>
+            </ul>
+
+            <h4>Users not in {{groupName}}</h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between" *ngFor="let usr of this.notInGroup">
+                    <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-sm" (click)="userDelete(usr.username)">Delete</button>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
