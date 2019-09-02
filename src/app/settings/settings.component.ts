@@ -61,4 +61,6 @@ export class SettingsComponent implements OnInit {
     usr.groupList[i].channels.push(channel);
     this.service.changeUserDetail(usr);
   }
+
+  
 }

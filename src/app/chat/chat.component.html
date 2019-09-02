@@ -22,9 +22,8 @@
         <div class="col-sm-4">
             <div class="border-info border rounded-top bg-info mt-3"><h5 class="pt-2 pb-1 px-3 text-white">Online Users</h5></div>
             <div class="border border-top-0">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Me</li>
-                    <li class="list-group-item">you</li>
+                <ul class="list-group list-group-flush" *ngFor="let usr of this.inChannel">
+                    <li class="list-group-item">{{usr.username}}</li>
                 </ul>
             </div>
         </div>
