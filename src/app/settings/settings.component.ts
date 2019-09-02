@@ -55,7 +55,10 @@ export class SettingsComponent implements OnInit {
     this.inGroup.splice(j, 1);
   }
 
-  onAddChannel(usr){
-
+  onAddChannel(usr, channel){
+    let i = usr.groupList.findIndex( grp =>
+      grp.name == this.groupName);
+    usr.groupList[i].channels.push(channel);
+    this.service.changeUserDetail(usr);
   }
 }

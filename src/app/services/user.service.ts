@@ -17,6 +17,8 @@ export class UserService {
     this.sendData$ = this.sendDataSubject.asObservable();
   }
 
+  
+
   inGroup(groupName){
     this.users = JSON.parse(localStorage.getItem("users"));
     let inGroup =[];
