@@ -78,7 +78,16 @@ export class SettingsComponent implements OnInit {
   }
 
   private onAssis(usr){
-    
+    let i = this.user.adminGroupList.findIndex(grp =>
+      grp.name == this.groupName);
+    let j = usr.adminGroupList.findIndex(group =>
+      group.name == this.groupName);
+    if( j == -1){
+      usr.adminGroupList.push(this.user.adminGroupList[i]);
+    } else {
+      usr.adminGroupList[j] = this.user.adminGroupList[i];
+    }
+    this.service.changeUserDetail(usr);
   }
 
   
