@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Submits the new user form to the service.
+   */
   itemSubmit() {
     this.user = { username: this.username, upwd: this.upwd};
     this.service.sendData(this.user);
