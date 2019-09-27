@@ -5,8 +5,9 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const sockets = require('./socket.js');
 const server = require('./listen.js');
-const User = require('./modal/user.js')
 const bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectID;
 
 // Define port used for server
 const PORT = 3000;
@@ -21,34 +22,30 @@ sockets.connect(io, PORT);
 // Start server listening for requests
 server.listen(http, PORT);
 
-app.all("/*", function(req, res, next){
+app.use(function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
-  });
-
-  /**
-   * Route to post user details to check in file.
-   */
-app.post('/api/login', function(req, res){
-    if (!req.body){
-        return res.endStatus(400);
-    }
-    let user = new User(req.body.username, req.body.upwd);
-    valid = JSON.stringify(user.check());
-    res.send(valid);
 });
 
-/**
- * Route to add new user
- */
-app.post('/api/user', function(req, res){
-    if (!req.body){
-        return res.endStatus(400);
-    }
-    let user = new User();
-    let data = JSON.stringify(req.body);
-    user.add(data);
-    res.send(data);
+const url = 'mongodb://localhost:27017';
+MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology: true}, function(err, client) {
+  if(err) {return console.log(err)}
+  
+  const dbName = 'Chat';
+  const db = client.db(dbName);
+    db.user.insertOne({username: "super", password: "super", super: true, admin: true, groupList:[]}, function(err, result){
+        console.log(result);
+    });
+    require('./routes/login.js/')(db, app);
+//   require('./routes/addUsr.js/')(db, app);
+//   require('./routes/read.js')(db, app);
+//   require('./routes/count.js')(db, app);
+//   require('./routes/valid.js')(db, app);
+//   require('./routes/remove.js')(db, app, ObjectID);
+//   require('./routes/update.js')(db, app, ObjectID);
+  // Start server listening for requests
+//   server.listen(http, PORT);
 });
+
