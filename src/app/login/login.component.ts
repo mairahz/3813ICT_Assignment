@@ -25,7 +25,12 @@ export class LoginComponent implements OnInit {
   itemSubmit() {
     this.user = new User(this.username, this.upwd);
     this.userService.login(this.user).subscribe((data) => {
-      console.log(data);
+      if (data.err == "No user"){
+        alert("Invalid credentials. Please try again");
+      } else {
+        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('valid', JSON.stringify({valid: true}));
+      }
     })
   };
 
