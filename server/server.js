@@ -35,10 +35,11 @@ MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology
   
   const dbName = 'Chat';
   const db = client.db(dbName);
-    db.user.insertOne({username: "super", password: "super", super: true, admin: true, groupList:[]}, function(err, result){
-        console.log(result);
-    });
-    require('./routes/login.js/')(db, app);
+  const collection = db.collection('user');
+    // collection.insertOne({username: "super", password: "super", super: true, admin: true, groupList:[]}, function(err, result){
+    //     console.log(result);
+    // });
+    require('./routes/login.js')(db, app);
 //   require('./routes/addUsr.js/')(db, app);
 //   require('./routes/read.js')(db, app);
 //   require('./routes/count.js')(db, app);

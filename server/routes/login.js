@@ -8,19 +8,11 @@ module.exports = function(db, app){
       const collection = db.collection('user');
       // check for username
       collection.find({'username': user.username}).next((err, result) => {
-        console.log(result);
-          // if(count == 0){
-          //     //if no duplicate
-          //     collection.insertOne(product, (err, dbres)=>{
-          //         if (err) throw err;
-          //         let num = dbres.insertedCount;
-          //         // send back to client number of items inserted and no error message.
-          //         res.send({'num':num, err:null});
-          //     });
-          // } else {
-          //     // On error, send back error message.
-          //     res.send({num:0, err:"duplicate item"});
-          // }
+        if (result == null){
+          res.send({err:"No user"});
+        } else {
+          res.send(result);
+        }
       });
   });
 }
