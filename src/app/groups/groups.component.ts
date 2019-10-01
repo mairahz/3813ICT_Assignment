@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { RouteService } from '../services/route.service';
-import { User } from '../user';
+import { User } from '../data/user';
+import { Group } from '../data/group';
 
 @Component({
   selector: 'app-groups',
@@ -16,7 +17,7 @@ export class GroupsComponent implements OnInit {
   valid: boolean = false; 
 
   newGroup: boolean = false;
-  group = {}; 
+  group: Group; 
   name: string = "";
   selectedGroup: string = "";
   
@@ -31,7 +32,6 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.newGroup = false;
-    console.log(this.user);
   }
 
   /**
@@ -41,12 +41,14 @@ export class GroupsComponent implements OnInit {
   private groupSubmit(){
     if(this.name){
       this.user.groupList.push(this.name);
-      this.adGroupList.push({name: this.name, channels: []});
-
-      localStorage.setItem("user", JSON.stringify(this.user));
-      this.service.changeUserDetail(this.user);
+      this.group = new Group(this.name);
+      this.service.addGrp(this.group).subscribe((data) => {
+        if(data.err == null) {
+          alert("Created");
+        }
+      });
       this.name = "";
-      this.newGroup = false;
+      localStorage.setItem("user", JSON.stringify(this.user));
     } else {
       alert("Please enter a group name.");
     }
