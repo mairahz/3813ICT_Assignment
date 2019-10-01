@@ -13,9 +13,8 @@ export class GroupsComponent implements OnInit {
   user: User; // Current user
   // groupList; // Current User's Grouplist
   // adGroupList // Current User's Admin Grouplist
-  users: [User]; // List of users
   valid: boolean = false; 
-
+  groups: Group[] = [];
   newGroup: boolean = false;
   group: Group; 
   name: string = "";
@@ -31,7 +30,9 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user"));
-    this.newGroup = false;
+    this.service.read().subscribe((data) => {
+      this.groups = data;
+    });
   }
 
   /**
@@ -42,11 +43,13 @@ export class GroupsComponent implements OnInit {
     if(this.name){
       this.user.groupList.push(this.name);
       this.group = new Group(this.name);
+      console.log(this.group);
       this.service.addGrp(this.group).subscribe((data) => {
         if(data.err == null) {
           alert("Created");
         }
       });
+      console.log(this.groups);
       this.name = "";
       localStorage.setItem("user", JSON.stringify(this.user));
     } else {
@@ -59,6 +62,7 @@ export class GroupsComponent implements OnInit {
    * @param group - name of group to be deleted.
    */
   private groupDelete(group: string){
+
     // let i = this.adGroupList.findIndex(groupItem =>
     //   groupItem.name == group);
     // this.adGroupList.splice(i, 1);

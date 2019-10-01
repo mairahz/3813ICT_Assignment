@@ -1,6 +1,6 @@
 export class Group {
   name: string;
-  channels: [];
+  channels: string[];
 
   constructor(name) {
     this.name = name;

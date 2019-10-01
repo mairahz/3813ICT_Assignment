@@ -14,8 +14,16 @@ export class RouteService {
     return this.http.post<any>('http://localhost:3000/api/login', user);
   }
 
+  read(){
+    return this.http.get<any>('http://localhost:3000/api/read');
+  }
+
   addGrp(group: Group){
     return this.http.post<any>('http://localhost:3000/api/addGrp', group);
+  }
+
+  deleteGrp(groupID){
+    return this.http.post<any>('http://localhost:3000/api/deleteGrp', {'groupid': groupID});
   }
 
   // dd(product:Product){

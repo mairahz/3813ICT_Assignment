@@ -9,6 +9,7 @@ module.exports = function(db, app){
       
       collection.insertOne(group, (err, dbres) => {
         if (err) throw err;
+        console.log(group);
         let num = dbres.insertedCount;
         res.send({'num':num, err:null});
       });
