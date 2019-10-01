@@ -9,12 +9,13 @@ import { Group } from '../data/group';
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.css']
 })
+
 export class GroupsComponent implements OnInit {
   user: User; // Current user
   // groupList; // Current User's Grouplist
   // adGroupList // Current User's Admin Grouplist
   valid: boolean = false; 
-  groups: Group[] = [];
+  groups: String[] = [];
   newGroup: boolean = false;
   group: Group; 
   name: string = "";
@@ -30,7 +31,8 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user"));
-    this.service.read().subscribe((data) => {
+    this.service.read(this.user).subscribe((data) =>  {
+      console.log(data)
       this.groups = data;
     });
   }
@@ -41,15 +43,14 @@ export class GroupsComponent implements OnInit {
    */
   private groupSubmit(){
     if(this.name){
-      this.user.groupList.push(this.name);
       this.group = new Group(this.name);
-      console.log(this.group);
-      this.service.addGrp(this.group).subscribe((data) => {
+      this.user.groupList.push(this.name);
+      this.service.addGrp({user:this.user, group:this.group}).subscribe((data) => {
         if(data.err == null) {
+          this.groups = data;
           alert("Created");
         }
       });
-      console.log(this.groups);
       this.name = "";
       localStorage.setItem("user", JSON.stringify(this.user));
     } else {

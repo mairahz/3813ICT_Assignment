@@ -1,17 +1,23 @@
-module.exports = function(db, app){
-  // Route to manage adding a Group
+module.exports = function(db, app, ObjectID){
+  // Route to add a group
   app.post('/api/addGrp', function(req, res){
-      if (!req.body){
+      if(!req.body){
           return res.sendStatus(400);
       }
-      group = req.body;
-      const collection = db.collection('group');
-      
-      collection.insertOne(group, (err, dbres) => {
-        if (err) throw err;
-        console.log(group);
-        let num = dbres.insertedCount;
-        res.send({'num':num, err:null});
+      user = req.body.user;
+      group = req.body.group;
+      var objectid = new ObjectID(user._id);
+      const users = db.collection('user');
+      const groups = db.collection('group');
+
+      users.updateOne({_id:objectid},{$set: {groupList: user.groupList}}, ()=>{
+        groups.insertOne(group, (err, dbres) => {
+          if (err) throw err;
+          groups.find({name: {$in: user.groupList}}).toArray((err, data)=>{
+            if (err) throw err;
+            res.send(data);
+          });
+        });
       });
   });
 }

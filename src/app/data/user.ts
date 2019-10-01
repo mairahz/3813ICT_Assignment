@@ -1,9 +1,11 @@
+import { Group } from './group';
+
 export class User {
   username: string;
   pass: string;
   super: boolean;
   group: boolean;
-  groupList: Array<string>;
+  groupList: String[];
 
   constructor(username, pass) {
     this.username = username;
