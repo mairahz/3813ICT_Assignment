@@ -14,7 +14,7 @@
           <a data-toggle="collapse" class="list-group-item list-group-item-info list-group-item-action" href="#{{group.name}}">{{group.name}}</a> 
         </h4>
       </div>
-      <div id="{{group}}" class="panel-collapse collapse list-group">
+      <div id="{{group.name}}" class="panel-collapse collapse list-group">
         <ul class="list-group" *ngFor="let channel of group.channels">
           <li class="list-group-item list-group-item-action d-flex justify-content-between">
             <p class="p-0 m-0 flex-grow-1" (click)="onClickChannel(group.name, channel)">{{channel}}</p>
@@ -22,7 +22,7 @@
           </li>
         </ul>
         <div class="panel-footer btn-group list-group-item">
-          <button type="button" class="btn btn-danger btn-sm" *ngIf="user.super" (click)="groupDelete(group)">Delete {{group}}</button>
+          <button type="button" class="btn btn-danger btn-sm" *ngIf="user.super" (click)="groupDelete(group._id, group.name)">Delete {{group.name}}</button>
           <button type="button" class="btn btn-success btn-sm" *ngIf="user.group == true" (click)="channelCreate(group.name)">Create new Channel</button>
           <button type="button" class="btn btn-secondary btn-sm" *ngIf="user.group == true" (click)="onClickSettings(group.name)">Settings</button>
         </div>

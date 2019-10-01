@@ -62,18 +62,21 @@ export class GroupsComponent implements OnInit {
    * Deletes the group.
    * @param group - name of group to be deleted.
    */
-  private groupDelete(group: string){
-
-    // let i = this.adGroupList.findIndex(groupItem =>
-    //   groupItem.name == group);
-    // this.adGroupList.splice(i, 1);
-
-    // i = this.groupList.findIndex(groupItem =>
-    //   groupItem.name == group);
-    // this.groupList.splice(i, 1);
-
-    // localStorage.setItem("user", JSON.stringify(this.user));
-    // this.service.deleteGroup(group);
+  private groupDelete(id, name){
+    if(confirm("Are you sure you want to delete this item?")){
+      for(let i=0; i<=this.user.groupList.length; i++){
+        if(name == this.user.groupList[i]){
+          this.user.groupList.splice(i, 1);
+          break;
+        }
+      }
+  
+      this.service.deleteGrp({user: this.user, groupid: id}).subscribe((data) => {
+        console.log(data);
+        this.groups = data;
+      }); 
+    }
+    localStorage.setItem("user", JSON.stringify(this.user));
   }
   /**
    * Navigate to change channel form.

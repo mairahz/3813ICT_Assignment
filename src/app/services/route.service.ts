@@ -22,8 +22,8 @@ export class RouteService {
     return this.http.post<any>('http://localhost:3000/api/addGrp', user);
   }
 
-  deleteGrp(groupID){
-    return this.http.post<any>('http://localhost:3000/api/deleteGrp', {'groupid': groupID});
+  deleteGrp(object){
+    return this.http.post<any>('http://localhost:3000/api/deleteGrp', object);
   }
 
   // dd(product:Product){
