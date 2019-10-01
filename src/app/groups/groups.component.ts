@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { RouteService } from '../services/route.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-groups',
@@ -8,10 +9,10 @@ import { RouteService } from '../services/route.service';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
-  user; // Current user
-  groupList; // Current User's Grouplist
-  adGroupList // Current User's Admin Grouplist
-  users; // List of users
+  user: User; // Current user
+  // groupList; // Current User's Grouplist
+  // adGroupList // Current User's Admin Grouplist
+  users: [User]; // List of users
   valid: boolean = false; 
 
   newGroup: boolean = false;
@@ -30,17 +31,7 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.newGroup = false;
-  }
-
-  /**
-  * Function that checks if a form for the new group is needed on the templete
-  */
-  private onClickGroup(){
-    if(!this.newGroup){
-      this.newGroup = true;
-    } else {
-      this.newGroup = false;
-    }
+    console.log(this.user);
   }
 
   /**
@@ -48,17 +39,17 @@ export class GroupsComponent implements OnInit {
    * Sends details to server.
    */
   private groupSubmit(){
-    // if(this.name){
-    //   this.groupList.push({name: this.name, channels: []});
-    //   this.adGroupList.push({name: this.name, channels: []});
+    if(this.name){
+      this.user.groupList.push(this.name);
+      this.adGroupList.push({name: this.name, channels: []});
 
-    //   localStorage.setItem("user", JSON.stringify(this.user));
-    //   this.service.changeUserDetail(this.user);
-    //   this.name = "";
-    //   this.newGroup = false;
-    // } else {
-    //   alert("Please enter a group name.");
-    // }
+      localStorage.setItem("user", JSON.stringify(this.user));
+      this.service.changeUserDetail(this.user);
+      this.name = "";
+      this.newGroup = false;
+    } else {
+      alert("Please enter a group name.");
+    }
   }
 
   /**

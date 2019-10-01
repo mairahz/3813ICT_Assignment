@@ -1,6 +1,6 @@
 module.exports = function(db, app){
   // Route to manage adding a User
-  app.post('/api/add', function(req, res){
+  app.post('/api/addUser', function(req, res){
       if (!req.body){
           return res.sendStatus(400);
       }
