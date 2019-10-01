@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from './services/login.service';
-import { UserService } from './services/user.service';
+import { User } from './user';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +12,11 @@ export class AppComponent {
   valid = false;
   public user: any = {};
 
-  public constructor(private service: UserService){
-    this.service.login.subscribe((data) => {
-      console.log(data)
-    });
+  public constructor(private data: DataService){
+    // this.service.login(this.user).subscribe((data) => {
+    //   console.log(data)
+    // });
+    this.data.currentValid.subscribe(valid => this.valid = valid)
   }
 
   ngOnInit(){}
@@ -32,6 +33,10 @@ export class AppComponent {
   //     }
   //   }
   // };
+
+  onUserValid(user: User){
+    console.log(user);
+  }
 
   onClickLogout(){
     localStorage.clear();

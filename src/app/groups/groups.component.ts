@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { UserService } from '../services/user.service';
+import { RouteService } from '../services/route.service';
 
 @Component({
   selector: 'app-groups',
@@ -20,7 +20,7 @@ export class GroupsComponent implements OnInit {
   selectedGroup: string = "";
   
 
-  constructor(private router: Router, private service: UserService) {
+  constructor(private router: Router, private service: RouteService) {
     this.valid = JSON.parse(localStorage.getItem("valid"));
     if(!this.valid){
       this.router.navigate(['login']);
