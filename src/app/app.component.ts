@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -11,33 +12,26 @@ export class AppComponent {
   valid = false;
   public user: any = {};
 
-  public constructor(private service: LoginService){
-    this.service.sendData$.subscribe((data) => {
-      if(data.valid){
-        this.valid = true;
-        this.user = data;
-        this.addStorage(this.user);
-        localStorage.setItem("valid", data.valid);
-      } else {
-        localStorage.setItem("valid", data.valid);
-      } 
+  public constructor(private service: UserService){
+    this.service.login.subscribe((data) => {
+      console.log(data)
     });
   }
 
   ngOnInit(){}
 
-  addStorage(user){
-    if (typeof(Storage) !== "undefined") {
-      if(user.valid){
-        localStorage.setItem("user", JSON.stringify(user.user));
-        localStorage.setItem("groupList", JSON.stringify(user.user.groupList));
-        if(user.user.group){
-          localStorage.setItem("adminGroupList", JSON.stringify(user.user.adminGroupList));
-        }
-        localStorage.setItem("users", JSON.stringify(user.usersList));
-      }
-    }
-  };
+  // addStorage(user){
+  //   if (typeof(Storage) !== "undefined") {
+  //     if(user.valid){
+  //       localStorage.setItem("user", JSON.stringify(user.user));
+  //       localStorage.setItem("groupList", JSON.stringify(user.user.groupList));
+  //       if(user.user.group){
+  //         localStorage.setItem("adminGroupList", JSON.stringify(user.user.adminGroupList));
+  //       }
+  //       localStorage.setItem("users", JSON.stringify(user.usersList));
+  //     }
+  //   }
+  // };
 
   onClickLogout(){
     localStorage.clear();

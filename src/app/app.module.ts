@@ -9,7 +9,7 @@ import { SocketService } from './services/socket.service';
 
 import { AppComponent } from './app.component';
 // import { ChatComponent } from './chat/chat.component';
-// import { GroupsComponent } from './groups/groups.component';
+import { GroupsComponent } from './groups/groups.component';
 // import { ChannelComponent } from './channel/channel.component';
 import { LoginComponent } from './login/login.component';
 // import { ProfileComponent } from './profile/profile.component';
@@ -20,7 +20,7 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     // ChatComponent,
-    // GroupsComponent,
+    GroupsComponent,
     // ChannelComponent,
     LoginComponent,
     // ProfileComponent,

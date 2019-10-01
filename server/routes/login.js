@@ -11,7 +11,7 @@ module.exports = function(db, app){
         if (result == null){
           res.send({err:"No user"});
         } else {
-          res.send(result);
+          res.send({user: result, valid: true});
         }
       });
   });

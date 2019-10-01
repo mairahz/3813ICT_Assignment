@@ -26,11 +26,6 @@ export class LoginService {
     })
     .subscribe(data => {
       this.data = data;
-      if(this.data.valid){
-        this.router.navigate(['/']);
-      } else {
-        alert("Invalid User Credentials.");
-      }
       this.sendDataSubject.next(data);
     });
   }

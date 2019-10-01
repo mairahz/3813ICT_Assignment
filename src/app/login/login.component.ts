@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 // import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   upwd = "";
   user;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -28,8 +29,9 @@ export class LoginComponent implements OnInit {
       if (data.err == "No user"){
         alert("Invalid credentials. Please try again");
       } else {
-        localStorage.setItem('user', JSON.stringify(data));
-        localStorage.setItem('valid', JSON.stringify({valid: true}));
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('valid', JSON.stringify({valid: data.valid}));
+        this.router.navigate(['']);
       }
     })
   };
