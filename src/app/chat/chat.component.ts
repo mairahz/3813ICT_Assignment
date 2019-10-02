@@ -18,8 +18,6 @@ export class ChatComponent implements OnInit {
   groupName: string;
   channelName: string;
   channel: Channel;
-  inChannel = [];
-  notInChannel = [];
   user;
   users;
 
@@ -46,7 +44,7 @@ export class ChatComponent implements OnInit {
    * Function for sending the messages to the server.
    */
   private initIoConnection(){
-    this.socketService.initSocket();
+    this.socketService.initSocket(this.channelName);
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: string) => {
         // Add new message to the messages array
