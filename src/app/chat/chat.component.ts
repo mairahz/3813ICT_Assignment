@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { RouteService } from '../services/route.service';
+import { Channel } from '../data/channel';
 
 @Component({
   selector: 'app-chat',
@@ -16,6 +17,7 @@ export class ChatComponent implements OnInit {
   valid: string = "";
   groupName: string;
   channelName: string;
+  channel: Channel;
   inChannel = [];
   notInChannel = [];
   user;
@@ -35,7 +37,7 @@ export class ChatComponent implements OnInit {
     this.initIoConnection();
     this.service.readCh({name: this.channelName}).subscribe((data) => {
       this.users = data.ch.members;
-      console.log(this.users)
+      this.channel = data.ch;
     });
     // this.ChannelSort();
   }
@@ -66,37 +68,21 @@ export class ChatComponent implements OnInit {
   }
 
   /**
-   * Makes a list of users that are in the channel.
-   */
-  // private ChannelSort(){
-  //   for(let i=0; i<this.users.length; i++){
-  //     if(this.users[i].groupList.length != 0){
-  //       let j = this.users[i].groupList.findIndex(grp =>
-  //         grp.name == this.groupName);
-  //       if( j != -1){
-  //         let k = this.users[i].groupList[j].channels.findIndex(channel => 
-  //           channel == this.channelName);
-  //         if(k != -1)
-  //         this.inChannel.push(this.users[i]);
-  //       }
-  //     }
-  //   }
-  // }
-
-  /**
    * Removes the selected user from the channel.
    * @param usr - User to be removed
    */
   private rmvUser(usr){
-    // let i = usr.groupList.findIndex(grp =>
-    //   grp.name == this.groupName);
-    // let j = usr.groupList[i].channels.findIndex(channel =>
-    //   channel == this.channelName);
-    // usr.groupList[i].channels.splice(j, 1);
-    // let k = this.inChannel.findIndex(user =>
-    //   user.username == usr.username);
-    // this.inChannel.splice(k, 1);
-    // this.service.changeUserDetail(usr);
+    if(confirm("Are you sure you want to delete this item?")){
+      for(let i=0; i<=this.channel.members.length; i++){
+        if(this.channel.members[i].username == usr.username){
+          this.channel.members.splice(i, 1);
+          this.service.updateCh(this.channel).subscribe((data) => {
+            alert("User removed from channel");
+          });
+          break;
+        }
+      }
+    }
   }
   
 }
