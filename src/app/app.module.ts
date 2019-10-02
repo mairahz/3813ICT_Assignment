@@ -12,9 +12,9 @@ import { AppComponent } from './app.component';
 import { GroupsComponent } from './groups/groups.component';
 import { ChannelComponent } from './channel/channel.component';
 import { LoginComponent } from './login/login.component';
-// import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './user/user.component';
-// import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +23,9 @@ import { UserComponent } from './user/user.component';
     GroupsComponent,
     ChannelComponent,
     LoginComponent,
-    // ProfileComponent,
+    ProfileComponent,
     UserComponent,
-    // SettingsComponent
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

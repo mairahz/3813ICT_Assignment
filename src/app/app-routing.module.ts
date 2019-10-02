@@ -4,9 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { ChannelComponent } from './channel/channel.component';
 import { GroupsComponent } from './groups/groups.component';
 import { LoginComponent } from './login/login.component';
-// import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './user/user.component';
-// import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const routes: Routes = [  
@@ -14,8 +14,8 @@ const routes: Routes = [
                           {path: '', component: GroupsComponent},
                           {path: 'channel/:group', component: ChannelComponent},
                           // {path: 'chat/:group/:channel', component: ChatComponent},
-                          // {path: 'settings/:group', component: SettingsComponent},
-                          // {path: 'profile', component: ProfileComponent},
+                          {path: 'settings/:group', component: SettingsComponent},
+                          {path: 'profile', component: ProfileComponent},
                           {path: 'user', component: UserComponent}
                         ];
 

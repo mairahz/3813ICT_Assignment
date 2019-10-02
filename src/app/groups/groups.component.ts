@@ -38,6 +38,7 @@ export class GroupsComponent implements OnInit {
   private groupSubmit(){
     if(this.name){
       this.group = new Group(this.name);
+      this.group.addMem(this.user);
       this.user.groupList.push(this.name);
       this.service.addGrp({user:this.user, group:this.group}).subscribe((data) => {
         if(data.err == null) {
