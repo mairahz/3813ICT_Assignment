@@ -10,7 +10,7 @@ import { SocketService } from './services/socket.service';
 import { AppComponent } from './app.component';
 // import { ChatComponent } from './chat/chat.component';
 import { GroupsComponent } from './groups/groups.component';
-// import { ChannelComponent } from './channel/channel.component';
+import { ChannelComponent } from './channel/channel.component';
 import { LoginComponent } from './login/login.component';
 // import { ProfileComponent } from './profile/profile.component';
 // import { UserComponent } from './user/user.component';
@@ -21,7 +21,7 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     // ChatComponent,
     GroupsComponent,
-    // ChannelComponent,
+    ChannelComponent,
     LoginComponent,
     // ProfileComponent,
     // UserComponent,

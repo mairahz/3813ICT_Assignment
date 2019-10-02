@@ -16,7 +16,6 @@ export class GroupsComponent implements OnInit {
   // adGroupList // Current User's Admin Grouplist
   valid: boolean = false; 
   groups: String[] = [];
-  newGroup: boolean = false;
   group: Group; 
   name: string = "";
   selectedGroup: string = "";
@@ -32,7 +31,6 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.service.read(this.user).subscribe((data) =>  {
-      console.log(data)
       this.groups = data;
     });
   }
@@ -79,10 +77,11 @@ export class GroupsComponent implements OnInit {
     localStorage.setItem("user", JSON.stringify(this.user));
   }
   /**
-   * Navigate to change channel form.
+   * Navigate to create channel page
    * @param group - Name of group
    */
-  private channelCreate(group){
+  private channelCreate(group: string){
+    console.log(group)
     this.router.navigate(['channel', group]);
   }
 
