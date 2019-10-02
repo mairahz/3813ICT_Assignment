@@ -17,7 +17,7 @@
       <div id="{{group.name}}" class="panel-collapse collapse list-group">
         <ul class="list-group" *ngFor="let channel of group.channels">
           <li class="list-group-item list-group-item-action d-flex justify-content-between">
-            <p class="p-0 m-0 flex-grow-1" (click)="onClickChannel(group.name, channel)">{{channel}}</p>
+            <p class="p-0 m-0 flex-grow-1" (click)="onClickChannel(group.name, channel)">{{channel.name}}</p>
             <button type="button" class="btn btn-danger btn-sm" (click)="channelDelete(channel, group)"*ngIf="user.group == true">Delete</button>
           </li>
         </ul>

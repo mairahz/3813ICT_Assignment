@@ -3,7 +3,7 @@
         <div class="col-md-8 col-md-offset-4"  *ngIf="!new; else elseBlock">
             <h1 class="text-center py-3 px-lg-5">Settings for {{groupName}}</h1>
 
-            <h4 class="pt-3">Group Admins</h4>
+            <!-- <h4 class="pt-3">Group Admins</h4>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between" *ngFor="let usr of this.admins">
                     <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </li>
-            </ul>
+            </ul> -->
 
             <h4 class="pt-3">Users in {{groupName}}</h4>
             <ul class="list-group">
@@ -47,7 +47,7 @@
                                 Add User to channel
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                                <a class="dropdown-item" (click)="onAddChannel(usr, channel)" *ngFor="let channel of this.channels">{{channel}}</a>
+                                <a class="dropdown-item" (click)="onAddChannel(usr, channel)" *ngFor="let channel of this.channels">{{channel.name}}</a>
                             </div>
                             <button type="button" class="btn btn-danger btn-sm" (click)="onRemove(usr)">
                                 Remove

@@ -35,6 +35,7 @@ export class SettingsComponent implements OnInit {
       this.group = data.group;
       this.inGroup = this.group.members;
       this.notInGroup = data.not;
+      this.channels = this.group.channels;
     });
   }
 
@@ -72,11 +73,6 @@ export class SettingsComponent implements OnInit {
         this.notInGroup = data.not;
       })
     })
-    // this.service.changeUserDetail(usr);
-    // this.notInGroup.push(usr);
-    // let j = this.inGroup.findIndex(use =>
-    //    usr.username == use.username);
-    // this.inGroup.splice(j, 1);
   }
 
   /**
@@ -85,10 +81,17 @@ export class SettingsComponent implements OnInit {
    * @param channel - name of channel to add user to
    */
   onAddChannel(usr, channel){
-    // let i = usr.groupList.findIndex( grp =>
-    //   grp.name == this.groupName);
-    // usr.groupList[i].channels.push(channel);
-    // this.service.changeUserDetail(usr);
+    for(let i=0; i<=channel.members.length; i++){
+      if(channel.members[i].username == usr.username){
+        alert("User is already in this channel");
+        break;
+      } else {
+        channel.members.push(usr);
+        this.service.updateCh(channel).subscribe((data) => {
+          alert("Successfully added user to channel!");
+        });
+      }
+    }
   }
 
   /**

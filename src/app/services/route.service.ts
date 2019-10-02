@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../data/user';
 import { Group } from '../data/group';
+import { Channel } from '../data/channel';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,10 @@ export class RouteService {
 
   updateGrp(group: Group){
     return this.http.post<any>('http://localhost:3000/api/updateGrp', group);
+  }
+
+  updateCh(channel: Channel){
+    return this.http.post<any>('http://localhost:3000/api/updateCh', channel);
   }
   // dd(product:Product){
   //   return this.http.post<any>('http://localhost:3000/api/add', product);

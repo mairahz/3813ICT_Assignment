@@ -52,6 +52,7 @@ MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology
   require('./routes/deleteUsr.js')(db, app, ObjectID);
   require('./routes/updateUsr.js')(db, app, ObjectID);
   require('./routes/updateGrp.js')(db, app, ObjectID);
+  require('./routes/updateCh.js')(db, app, ObjectID);
 //   require('./routes/count.js')(db, app);
 //   require('./routes/valid.js')(db, app);
 //   require('./routes/remove.js')(db, app, ObjectID);

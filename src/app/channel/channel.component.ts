@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { RouteService } from '../services/route.service';
 import { Group } from '../data/group';
+import { Channel } from '../data/channel';
 
 @Component({
   selector: 'app-channel',
@@ -33,7 +34,10 @@ export class ChannelComponent implements OnInit {
    * Function that creates a channel for a group.
    */
   private channelSubmit(){
-    this.service.addCh({group: this.group, channel: this.name}).subscribe((data) => {
+    var ch = new Channel(this.name);
+    ch.members.push(this.user);
+    this.service.addCh({group: this.group, channel: ch}).subscribe((data) => {
+      console.log(data)
       if(data.err == null){
         this.router.navigate(['']);
       }
