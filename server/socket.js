@@ -5,8 +5,10 @@ module.exports = {
             console.log('User connection on port ' + PORT + ' : ' + socket.id);
             socket.on('create', function(room) {
                 socket.join(room);
+                io.to(room).emit('join', 'A user has joined the room.');
                 // When message comes in, emit it back to all sockets with the message.
                 socket.on('message', (message) => {
+                    console.log(message)
                     io.in(room).emit('message', message);
                 });
             })

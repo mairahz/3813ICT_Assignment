@@ -4,7 +4,8 @@
             <div class="border-info border rounded-top bg-info mt-3"><h5 class="pt-2 pb-1 px-3 text-white">Chat Messages</h5></div>
             <div class="border-right border-left">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item" *ngFor="let message of messages"><b>Me: </b>{{message}}</li>
+                    <li class="list-group-item" *ngFor="let msg of system"><i>{{msg}}</i></li>
+                    <li class="list-group-item" *ngFor="let message of messages"><b *ngIf="this.user.username != message.author">{{message.author}}: </b><b *ngIf="this.user.username == message.author">Me: </b>{{message.message}}</li>
                 </ul>
             </div>
             <div class="border rounded-bottom pt-3 px-5 bg-light">

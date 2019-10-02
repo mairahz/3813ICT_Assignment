@@ -3,6 +3,7 @@ import { SocketService } from '../services/socket.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { RouteService } from '../services/route.service';
 import { Channel } from '../data/channel';
+import { Message } from '../data/message';
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +13,8 @@ import { Channel } from '../data/channel';
 export class ChatComponent implements OnInit {
 
   messagecontent: string = "";
-  messages: string[] = [];
+  messages: Message[] = [];
+  system: string[] = [];
   ioConnection:any;
   valid: string = "";
   groupName: string;
@@ -46,10 +48,14 @@ export class ChatComponent implements OnInit {
   private initIoConnection(){
     this.socketService.initSocket(this.channelName);
     this.ioConnection = this.socketService.onMessage()
-      .subscribe((message: string) => {
+      .subscribe((message: Message) => {
+        console.log(message)
         // Add new message to the messages array
         this.messages.push(message);
       });
+    this.socketService.onJoin().subscribe((data:string) => {
+      this.system.push(data);
+    })
   }
 
   /**
@@ -58,7 +64,8 @@ export class ChatComponent implements OnInit {
   private chat(){
     if(this.messagecontent){
       // Check there is a message to send
-      this.socketService.send(this.messagecontent);
+      var msg = new Message(this.user.username, this.messagecontent);
+      this.socketService.send(msg);
       this.messagecontent = null;
     } else {
       console.log("No message");

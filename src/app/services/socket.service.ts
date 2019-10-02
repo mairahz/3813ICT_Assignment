@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client';
+import { Message } from '../data/message';
 const SERVER_URL = 'http://localhost:3000';
 
 @Injectable({
@@ -15,13 +16,21 @@ export class SocketService {
     this.socket.emit('create', room);
   }
 
-  public send(message: string): void {
+  public send(message: Message): void {
+    console.log(message)
     this.socket.emit('message', message);
+  }
+
+  public onJoin(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('join', (data:string) => observer.next(data));
+    });
+    return observable;
   }
 
   public onMessage(): Observable<any> {
     let observable = new Observable(observer=>{
-      this.socket.on('message', (data:string) => observer.next(data));
+      this.socket.on('message', (data:Message) => observer.next(data));
     });
     return observable;
   }
