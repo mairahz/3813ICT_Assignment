@@ -27,6 +27,10 @@ export class RouteService {
     return this.http.post<any>('http://localhost:3000/api/readGrp', name);
   }
 
+  readCh(name){
+    return this.http.post<any>('http://localhost:3000/api/readCh', name);
+  }
+
   addUsr(user: User){
     return this.http.post<any>('http://localhost:3000/api/addUsr', user);
   }

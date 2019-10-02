@@ -20,13 +20,13 @@
         </div>
 
         <div class="col-sm-4">
-            <div class="border-info border rounded-top bg-info mt-3"><h5 class="pt-2 pb-1 px-3 text-white">Online Users</h5></div>
+            <div class="border-info border rounded-top bg-info mt-3"><h5 class="pt-2 pb-1 px-3 text-white">Members</h5></div>
             <div class="border border-top-0">
-                <ul class="list-group list-group-flush" *ngFor="let usr of this.inChannel">
+                <ul class="list-group list-group-flush" *ngFor="let usr of this.users">
                     <li class="list-group-item list-group-item-action d-flex justify-content-between">
                         <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger btn-sm" (click)="rmvUser(usr)">Remove</button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="rmvUser(usr)" *ngIf="usr.username != this.user.username">Remove</button>
                         </div>
                     </li>
                 </ul>

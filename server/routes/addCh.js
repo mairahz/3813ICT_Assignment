@@ -6,12 +6,17 @@ module.exports = function(db, app, ObjectID){
     }
     group = req.body;
     const groups = db.collection('group');
-    groups.find({name: group.group}).toArray((err, data) => {
-      var objectid = new ObjectID(data[0]._id);
-      groups.updateOne({_id:objectid}, {$push: {channels: group.channel}}, () => {
-        groups.find({_id:objectid}).toArray((err, data) => {
-          if (err) throw err;
-          res.send({'ok': data, 'err': null});
+    const channels = db.collection('channel');
+
+    channels.insertOne(group.channel, (err) => {
+      if(err) throw err;
+      groups.find({name: group.group}).toArray((err, data) => {
+        var objectid = new ObjectID(data[0]._id);
+        groups.updateOne({_id:objectid}, {$push: {channels: group.channel}}, () => {
+          groups.find({_id:objectid}).toArray((err, data) => {
+            if (err) throw err;
+            res.send({'ok': data, 'err': null});
+          });
         });
       });
     });

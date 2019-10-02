@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SocketService } from './services/socket.service';
 
 import { AppComponent } from './app.component';
-// import { ChatComponent } from './chat/chat.component';
+import { ChatComponent } from './chat/chat.component';
 import { GroupsComponent } from './groups/groups.component';
 import { ChannelComponent } from './channel/channel.component';
 import { LoginComponent } from './login/login.component';
@@ -19,7 +19,7 @@ import { SettingsComponent } from './settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
-    // ChatComponent,
+    ChatComponent,
     GroupsComponent,
     ChannelComponent,
     LoginComponent,
