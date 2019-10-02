@@ -30,6 +30,9 @@ export class RouteService {
     return this.http.post<any>('http://localhost:3000/api/deleteGrp', object);
   }
 
+  deleteCh(object){
+    return this.http.post<any>('http://localhost:3000/api/deleteCh', object);
+  }
   // dd(product:Product){
   //   return this.http.post<any>('http://localhost:3000/api/add', product);
   // }

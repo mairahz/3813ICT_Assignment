@@ -11,7 +11,7 @@ module.exports = function(db, app, ObjectID){
       groups.updateOne({_id:objectid}, {$push: {channels: group.channel}}, () => {
         groups.find({_id:objectid}).toArray((err, data) => {
           if (err) throw err;
-          res.send({'ok': data});
+          res.send({'ok': data, 'err': null});
         });
       });
     });

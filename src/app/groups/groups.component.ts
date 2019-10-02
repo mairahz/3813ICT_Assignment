@@ -70,7 +70,6 @@ export class GroupsComponent implements OnInit {
       }
   
       this.service.deleteGrp({user: this.user, groupid: id}).subscribe((data) => {
-        console.log(data);
         this.groups = data;
       }); 
     }
@@ -91,19 +90,9 @@ export class GroupsComponent implements OnInit {
    * @param group - group name that the channel is in
    */
   private channelDelete(channel, group){
-    // let i = this.groupList.findIndex(groupItem =>
-    //   groupItem.name == group);
-    // let k = this.groupList[i].channels.findIndex(chan =>
-    //   chan == channel);
-    // this.groupList[i].channels.splice(k, 1);
-
-    // let j = this.adGroupList.findIndex(groupItem =>
-    //   groupItem.name == group);
-    // this.adGroupList[j] = this.groupList[i];
-    
-    // localStorage.setItem("user", JSON.stringify(this.user));
-    // // this.service.deleteChannel(group, channel);
-    // this.service.changeUserDetail(this.user);
+    this.service.deleteCh({channel: channel, group: group, user: this.user}).subscribe((data) => {
+      this.groups = data;
+    });
   }
 
   /**

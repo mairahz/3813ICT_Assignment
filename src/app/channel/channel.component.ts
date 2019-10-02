@@ -34,23 +34,10 @@ export class ChannelComponent implements OnInit {
    */
   private channelSubmit(){
     this.service.addCh({group: this.group, channel: this.name}).subscribe((data) => {
-      console.log(data);
-    })
-  //   for(let i=0; i<=this.user.groupList.length; i++){
-  //     if(this.user.groupList[i].name == this.groupName){
-  //       this.user.groupList[i].channels.push(this.name);
-  //       let k = this.user.adminGroupList.findIndex(grp =>
-  //         grp.name == this.groupName);
-  //         console.log(this.user.adminGroupList[k] )
-  //       this.user.adminGroupList[k] = this.user.groupList[i];
-  //       break;
-  //     }
-  //   }
-  //   this.service.adminChannelAdd(this.name, this.groupName);
-  //   localStorage.setItem("user", JSON.stringify(this.user));
-  //   localStorage.setItem("users", JSON.stringify(this.users));
-  //   this.service.sendData(this.users);
-  //   this.router.navigate(['']);
+      if(data.err == null){
+        this.router.navigate(['']);
+      }
+    });
   }
 
 }
