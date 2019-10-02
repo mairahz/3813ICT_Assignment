@@ -43,6 +43,16 @@ export class SettingsComponent implements OnInit {
    * @param usr -user to be added
    */
   onAdd(usr){
+    usr.groupList.push(this.groupName);
+    this.service.updateUsr(usr).subscribe(() => {
+      this.group.members.push(usr);
+      this.service.updateGrp(this.group).subscribe((data) => {
+        console.log(data)
+        this.group = data.group;
+        this.inGroup = this.group.members;
+        this.notInGroup = data.not;
+      });
+    });
     // usr.groupList.push({name: this.groupName, channels: []});
     // this.service.changeUserDetail(usr);
     // let i = this.notInGroup.findIndex(use =>

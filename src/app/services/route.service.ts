@@ -53,6 +53,10 @@ export class RouteService {
   updateUsr(user: User){
     return this.http.post<any>('http://localhost:3000/api/updateUsr', user);
   }
+
+  updateGrp(group: Group){
+    return this.http.post<any>('http://localhost:3000/api/updateGrp', group);
+  }
   // dd(product:Product){
   //   return this.http.post<any>('http://localhost:3000/api/add', product);
   // }

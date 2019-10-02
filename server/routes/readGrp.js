@@ -16,12 +16,7 @@ module.exports = function(db, app){
         } else {
           res.send({'error': 'Error to get data'});
         }
-      })
-        // if(err == null){
-        //     res.send(data[0]);
-        // } else {
-        //     res.send({'error': 'Error to get data'});
-        // }
+      });
     });
   });
 }

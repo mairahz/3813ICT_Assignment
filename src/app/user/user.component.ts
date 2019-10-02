@@ -117,6 +117,7 @@ export class UserComponent implements OnInit {
    * @param usr -User to be made admin
    */
   private makeAdmin(usr){
+    usr.group = true;
     this.service.updateUsr(usr).subscribe((data) => {
       if(data.err == null) {
         alert("Updated successfully");
