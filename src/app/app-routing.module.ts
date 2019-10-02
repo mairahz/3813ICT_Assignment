@@ -5,7 +5,7 @@ import { ChannelComponent } from './channel/channel.component';
 import { GroupsComponent } from './groups/groups.component';
 import { LoginComponent } from './login/login.component';
 // import { ProfileComponent } from './profile/profile.component';
-// import { UserComponent } from './user/user.component';
+import { UserComponent } from './user/user.component';
 // import { SettingsComponent } from './settings/settings.component';
 
 
@@ -16,7 +16,7 @@ const routes: Routes = [
                           // {path: 'chat/:group/:channel', component: ChatComponent},
                           // {path: 'settings/:group', component: SettingsComponent},
                           // {path: 'profile', component: ProfileComponent},
-                          // {path: 'user', component: UserComponent}
+                          {path: 'user', component: UserComponent}
                         ];
 
 @NgModule({

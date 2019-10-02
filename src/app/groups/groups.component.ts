@@ -12,14 +12,10 @@ import { Group } from '../data/group';
 
 export class GroupsComponent implements OnInit {
   user: User; // Current user
-  // groupList; // Current User's Grouplist
-  // adGroupList // Current User's Admin Grouplist
   valid: boolean = false; 
   groups: String[] = [];
   group: Group; 
   name: string = "";
-  selectedGroup: string = "";
-  
 
   constructor(private router: Router, private service: RouteService) {
     this.valid = JSON.parse(localStorage.getItem("valid"));
