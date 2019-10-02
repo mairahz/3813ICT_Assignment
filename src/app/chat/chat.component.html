@@ -3,10 +3,12 @@
         <div class="col-sm-8">
             <div class="border-info border rounded-top bg-info mt-3"><h5 class="pt-2 pb-1 px-3 text-white">Chat Messages</h5></div>
             <div class="border-right border-left">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" *ngFor="let msg of system"><i>{{msg}}</i></li>
-                    <li class="list-group-item" *ngFor="let message of messages"><b *ngIf="this.user.username != message.author">{{message.author}}: </b><b *ngIf="this.user.username == message.author">Me: </b>{{message.message}}</li>
-                </ul>
+                <ul class="list-group list-group-flush" *ngFor="let message of messages">
+                    <li class="list-group-item" *ngIf="message.author == null; else elseBlock"><i>{{message.message}}</i></li>
+                    <ng-template #elseBlock>
+                        <li class="list-group-item"><b *ngIf="this.user.username != message.author">{{message.author}}: </b><b *ngIf="this.user.username == message.author">Me: </b>{{message.message}}</li>
+                    </ng-template>
+                    </ul>
             </div>
             <div class="border rounded-bottom pt-3 px-5 bg-light">
                 <form class="mt-auto">
@@ -27,11 +29,12 @@
                     <li class="list-group-item list-group-item-action d-flex justify-content-between">
                         <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger btn-sm" (click)="rmvUser(usr)" *ngIf="usr.username != this.user.username">Remove</button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="rmvUser(usr)" *ngIf="usr.username != this.user.username && this.user.group">Remove</button>
                         </div>
                     </li>
                 </ul>
             </div>
+            <button type="button" class="btn btn-primary mt-5" (click)="leaveRoom()">Leave Room</button>
         </div>
     </div>
 </div>

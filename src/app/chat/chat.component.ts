@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { RouteService } from '../services/route.service';
 import { Channel } from '../data/channel';
 import { Message } from '../data/message';
+import { User } from '../data/user';
 
 @Component({
   selector: 'app-chat',
@@ -16,12 +17,12 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [];
   system: string[] = [];
   ioConnection:any;
-  valid: string = "";
+  valid: boolean;
   groupName: string;
   channelName: string;
   channel: Channel;
-  user;
-  users;
+  user: User;
+  users: User[];
 
   constructor(private socketService:SocketService, private router: Router, private route: ActivatedRoute, private service: RouteService) {
     this.valid = JSON.parse(localStorage.getItem("valid"));
@@ -40,8 +41,6 @@ export class ChatComponent implements OnInit {
       this.channel = data.ch;
       this.messages = data.ch.messages;
     });
-
-    // this.ChannelSort();
   }
 
   /**
@@ -59,9 +58,13 @@ export class ChatComponent implements OnInit {
           }
         });
       });
-    this.socketService.onJoin().subscribe((data:string) => {
-      this.system.push(data);
-    })
+    this.socketService.onJoin().subscribe((data:Message) => {
+      this.messages.push(data);
+    });
+    this.socketService.onLeave().subscribe((data:Message) => {
+      console.log(data);
+      this.messages.push(data);
+    });
   }
 
   /**
@@ -94,6 +97,16 @@ export class ChatComponent implements OnInit {
         }
       }
     }
+  }
+
+  /**
+   * Function that disconnects user from the room.
+   */
+  private leaveRoom(){
+    var msg = new Message(null, "A user has left the room.");
+    this.socketService.send(msg);
+    this.messages.push(msg);
+    this.router.navigate(['']);
   }
   
 }

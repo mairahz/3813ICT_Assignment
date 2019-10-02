@@ -22,7 +22,14 @@ export class SocketService {
 
   public onJoin(): Observable<any> {
     let observable = new Observable(observer=>{
-      this.socket.on('join', (data:string) => observer.next(data));
+      this.socket.on('join', (data: Message) => observer.next(data));
+    });
+    return observable;
+  }
+
+  public onLeave(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('disconnect', (data: Message) => observer.next(data));
     });
     return observable;
   }
