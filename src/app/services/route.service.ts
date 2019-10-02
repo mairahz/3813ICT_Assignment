@@ -45,6 +45,10 @@ export class RouteService {
   deleteCh(object){
     return this.http.post<any>('http://localhost:3000/api/deleteCh', object);
   }
+
+  updateUsr(user: User){
+    return this.http.post<any>('http://localhost:3000/api/updateUsr', user);
+  }
   // dd(product:Product){
   //   return this.http.post<any>('http://localhost:3000/api/add', product);
   // }
