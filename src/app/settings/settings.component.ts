@@ -47,19 +47,11 @@ export class SettingsComponent implements OnInit {
     this.service.updateUsr(usr).subscribe(() => {
       this.group.members.push(usr);
       this.service.updateGrp(this.group).subscribe((data) => {
-        console.log(data)
         this.group = data.group;
         this.inGroup = this.group.members;
         this.notInGroup = data.not;
       });
     });
-    // usr.groupList.push({name: this.groupName, channels: []});
-    // this.service.changeUserDetail(usr);
-    // let i = this.notInGroup.findIndex(use =>
-    //   use.name == usr.name);
-    // this.notInGroup.splice(i, 1);
-    // this.inGroup.push(usr);
-    // alert("User has been added to the group.")
   }
 
   /**
@@ -67,9 +59,19 @@ export class SettingsComponent implements OnInit {
    * @param usr - user to be removed
    */
   onRemove(usr){
-    // let i = usr.groupList.findIndex(group =>
-    //   group.name == this.groupName);
-    // usr.groupList.splice(i, 1);
+    let i = usr.groupList.findIndex(group =>
+      group.name == this.groupName);
+    usr.groupList.splice(i, 1);
+    this.service.updateUsr(usr).subscribe(() => {
+      let j = this.group.members.findIndex(mem =>
+        mem.username == usr.username);
+      this.group.members.splice(j, 1);
+      this.service.updateGrp(this.group).subscribe((data) => {
+        this.group = data.group;
+        this.inGroup = this.group.members;
+        this.notInGroup = data.not;
+      })
+    })
     // this.service.changeUserDetail(usr);
     // this.notInGroup.push(usr);
     // let j = this.inGroup.findIndex(use =>
