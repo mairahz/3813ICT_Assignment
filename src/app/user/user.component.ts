@@ -102,17 +102,14 @@ export class UserComponent implements OnInit {
 
   /**
    * Deletes a user from the users list.
-   * @param username - Name of the user to be deleted.
+   * @param usr - User to be deleted.
    */
-  private userDelete(username){
-    // for(let i=0; i<= this.users.length; i++){
-    //   if(this.users[i].username == username){
-    //     this.users.splice(i, 1);
-    //     break;
-    //   }
-    // }
-    // localStorage.setItem("users", JSON.stringify(this.users));
-    // this.service.sendData(this.users);
+  private userDelete(usr){
+    if(confirm("Are you sure you want to delete " + usr.username + "?")){
+      this.service.deleteUsr(usr).subscribe((data) => {
+        this.users = data;
+      });
+    }
   }
 
   /**

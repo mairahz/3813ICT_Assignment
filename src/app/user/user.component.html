@@ -11,7 +11,7 @@
                     <p class="p-0 m-0 flex-grow-1">{{usr.username}}</p>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-sm" (click)="makeAdmin(usr)" *ngIf="!usr.group">Make Admin</button>
-                        <button type="button" class="btn btn-danger btn-sm" (click)="userDelete(usr.username)" *ngIf="!usr.super">Delete</button>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="userDelete(usr)" *ngIf="!usr.super">Delete</button>
                     </div>
                     
                 </li>

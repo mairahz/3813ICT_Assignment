@@ -34,6 +34,10 @@ export class RouteService {
     return this.http.post<any>('http://localhost:3000/api/addCh', group);
   }
 
+  deleteUsr(user: User){
+    return this.http.post<any>('http://localhost:3000/api/deleteUsr', user);
+  }
+
   deleteGrp(object){
     return this.http.post<any>('http://localhost:3000/api/deleteGrp', object);
   }
