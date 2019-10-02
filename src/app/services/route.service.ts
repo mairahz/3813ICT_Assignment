@@ -43,6 +43,10 @@ export class RouteService {
     return this.http.post<any>('http://localhost:3000/api/addCh', group);
   }
 
+  addMsg(channel: Channel){
+    return this.http.post<any>('http://localhost:3000/api/addMsg', channel);
+  }
+
   deleteUsr(user: User){
     return this.http.post<any>('http://localhost:3000/api/deleteUsr', user);
   }

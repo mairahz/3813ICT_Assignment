@@ -38,7 +38,9 @@ export class ChatComponent implements OnInit {
     this.service.readCh({name: this.channelName}).subscribe((data) => {
       this.users = data.ch.members;
       this.channel = data.ch;
+      this.messages = data.ch.messages;
     });
+
     // this.ChannelSort();
   }
 
@@ -49,9 +51,13 @@ export class ChatComponent implements OnInit {
     this.socketService.initSocket(this.channelName);
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
-        console.log(message)
         // Add new message to the messages array
         this.messages.push(message);
+        this.service.addMsg(this.channel).subscribe((data) => {
+          if(data.err == null){
+            console.log("saved");
+          }
+        });
       });
     this.socketService.onJoin().subscribe((data:string) => {
       this.system.push(data);
