@@ -47,6 +47,10 @@ export class RouteService {
     return this.http.post<any>('http://localhost:3000/api/addMsg', channel);
   }
 
+  upFile(file){
+    return this.http.post<any>('http://localhost:3000/api/image', file);
+  }
+
   deleteUsr(user: User){
     return this.http.post<any>('http://localhost:3000/api/deleteUsr', user);
   }

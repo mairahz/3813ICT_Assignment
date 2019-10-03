@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
   username: string = "";
   email: string = "";
   upwd: string = "";
+  path: string = "";
   super: boolean = false;
   group: boolean = false;
   newUsr: User; // Details of new user object
@@ -85,6 +86,7 @@ export class UserComponent implements OnInit {
       if(this.super){
         this.group = true;
       }
+      this.newUsr.path = this.path;
       this.newUsr.setEmail(this.email);
       this.newUsr.setSuper(this.super);
       this.newUsr.setGroup(this.group);
@@ -92,6 +94,7 @@ export class UserComponent implements OnInit {
         if(data.err != null){
           alert("Username taken. Please choose a different username.");
         } else {
+          console.log(data);
           this.users = data.users;
           this.onClickCancel();
           alert("User Created");
@@ -124,6 +127,19 @@ export class UserComponent implements OnInit {
         this.users = data;
       }
     })
+  }
+
+  /**
+   * Process image
+   * @param imageInput - file uploaded
+   */
+  processFile(imageInput: any){
+    const file: File = imageInput.files[0];
+    const form = new FormData();
+    form.append('file', file, file.name);
+    this.service.upFile(form).subscribe(
+      (res) => {this.path = res.ok;}
+    )
   }
 
 }

@@ -2,6 +2,7 @@ export class User {
   username: string;
   pass: string;
   email: string;
+  path: string;
   super: boolean;
   group: boolean;
   groupList: String[];
@@ -10,6 +11,7 @@ export class User {
     this.username = username;
     this.pass = pass;
     this.email = "";
+    this.path = "";
     this.super = false;
     this.group = false;
     this.groupList = [];

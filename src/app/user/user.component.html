@@ -37,6 +37,11 @@
                                 <input type="email" class="form-control" [(ngModel)]="email" name="email" id="email" placeholder="Email Address">
                             </div>
                             <div class="form-group">
+                                <label>Profile Picture</label>
+                                <input #imageInput type="file" class="form-control" accept="image/*" (change)="processFile(imageInput)">
+                                <!-- <button (click)="onFileUpload()">Upload</button> -->
+                            </div>
+                            <div class="form-group">
                                 <input type="password" name="upwd" [(ngModel)]="upwd" class="form-control" id="upwd" placeholder="Password">
                                 <small id="passwordHelpBlock" class="form-text text-muted">
                                     Your password must be at least 6 characters long.
