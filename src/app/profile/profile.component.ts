@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { RouteService } from '../services/route.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,17 +13,23 @@ export class ProfileComponent implements OnInit {
 
   username = "";
   email = "";
+  path;
   editmode = false; // Check if page is in edit mode.
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: RouteService) {
     this.valid = JSON.parse(localStorage.getItem("valid"));
     if(!this.valid){
       this.router.navigate(['login']);
     }
+    this.user = JSON.parse(localStorage.getItem("user"));
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("user"));
+    this.path = "http://localhost:3000/api/readImg?param=" + this.user.path;
+    console.log(this.path)
+    // this.service.readImg({path:this.user.path}).subscribe((data) => {
+    //   this.path = data;
+    // });
   } 
 
   /**
