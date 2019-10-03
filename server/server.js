@@ -66,3 +66,4 @@ MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology
   require('./routes/updateCh.js')(db, app, ObjectID);
 });
 
+module.exports = app;

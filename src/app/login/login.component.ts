@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
     this.user = new User(this.username, this.upwd);
     this.route.login(this.user).subscribe((data) => {
       if (data.err == "No user"){
+        alert("No user found. Please try again");
+      } else if (data.user.password != this.upwd){
         alert("Invalid credentials. Please try again");
       } else {
         localStorage.setItem('user', JSON.stringify(data.user));
