@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.path = "http://localhost:3000/api/readImg?param=" + this.user.path;
+    this.path = this.user.path;
     console.log(this.path)
     // this.service.readImg({path:this.user.path}).subscribe((data) => {
     //   this.path = data;

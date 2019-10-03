@@ -38,7 +38,7 @@ app.post('/api/image', function (req, res){ // endpoint for root level of the si
     file.path = __dirname + '/uploads/' + file.name; // need to create directory "/uploads" 
   });
   form.on('file', function (name, file){ // when a file has been received console.log('Uploaded ' + file.name);
-    res.send({ok: file.path});
+    res.send({ok: 'http://localhost:3000/api/readImg?param=' + file.path});
   });
 });
 
@@ -48,11 +48,6 @@ MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology
   
   const dbName = 'Chat';
   const db = client.db(dbName);
-  // db.collection('group').drop();
-  // const collection = db.collection('user');
-  //   collection.insertOne({username: "super", password: "super", super: true, group: true, groupList:[]}, function(err, result){
-  //       console.log(result);
-  //   });
   require('./routes/login.js')(db, app);
   require('./routes/addGrp.js')(db, app, ObjectID);
   require('./routes/addCh.js')(db, app, ObjectID);
@@ -69,11 +64,5 @@ MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology
   require('./routes/updateUsr.js')(db, app, ObjectID);
   require('./routes/updateGrp.js')(db, app, ObjectID);
   require('./routes/updateCh.js')(db, app, ObjectID);
-//   require('./routes/count.js')(db, app);
-//   require('./routes/valid.js')(db, app);
-//   require('./routes/remove.js')(db, app, ObjectID);
-//   require('./routes/update.js')(db, app, ObjectID);
-  // Start server listening for requests
-//   server.listen(http, PORT);
 });
 

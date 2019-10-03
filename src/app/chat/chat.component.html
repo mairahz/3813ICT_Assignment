@@ -6,7 +6,7 @@
                 <ul class="list-group list-group-flush" *ngFor="let message of messages">
                     <li class="list-group-item" *ngIf="message.author == null; else elseBlock"><i>{{message.message}}</i></li>
                     <ng-template #elseBlock>
-                        <li class="list-group-item"><b *ngIf="this.user.username != message.author">{{message.author}}: </b><b *ngIf="this.user.username == message.author">Me: </b>{{message.message}}</li>
+                        <li class="list-group-item"><img src="{{message.path}}" class="rounded" height="50px" width="50px"/><b *ngIf="this.user.username != message.author">{{message.author}}: </b><b *ngIf="this.user.username == message.author">Me: </b>{{message.message}}</li>
                     </ng-template>
                     </ul>
             </div>

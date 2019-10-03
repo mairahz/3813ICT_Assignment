@@ -2,7 +2,9 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-md-offset-4" *ngIf="!editmode; else elseBlock">
             <h2 class="text-center py-3 px-lg-5">Profile Details</h2>
-            <img src="{{this.path}}" height="200px" width="200px"/>
+            <div class="text-center">
+                <img src="{{this.path}}" class="img-thumbnail" height="200px" width="200px"/>
+            </div>
             <table class="table">
                 <tbody>
                     <tr>

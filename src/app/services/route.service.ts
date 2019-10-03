@@ -23,10 +23,6 @@ export class RouteService {
     return this.http.get<any>('http://localhost:3000/api/readUsr');
   }
 
-  // readImg(img){
-  //   return this.http.post<any>('http://localhost:3000/api/readImg?param=', img);
-  // }
-
   readGrp(name){
     return this.http.post<any>('http://localhost:3000/api/readGrp', name);
   }
@@ -78,32 +74,4 @@ export class RouteService {
   updateCh(channel: Channel){
     return this.http.post<any>('http://localhost:3000/api/updateCh', channel);
   }
-  // dd(product:Product){
-  //   return this.http.post<any>('http://localhost:3000/api/add', product);
-  // }
-
-  // read(){
-  //   return this.http.get<any>('http://localhost:3000/api/read');
-  // }
-
-  // getItem(productID){
-  //   return this.http.post<any>('http://localhost:3000/api/getItem', {'productid':productID});
-  // }
-
-  // update(product: Product){
-  //   return this.http.post<any>('http://localhost:3000/api/update', product);
-  // }
-
-  // delete(productID){
-  //   return this.http.post<any>('http://localhost:3000/api/delete', {'productid': productID});
-  // }
-
-  // checkvalidid(productID){
-  //   return this.http.post<any>('http://localhost:3000/api/valid', {'id':productID});
-  // }
-
-  // getCount(){
-  //   return this.http.get<any>('http://localhost:3000/api/count');
-  // }
-  
 }

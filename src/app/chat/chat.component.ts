@@ -73,7 +73,7 @@ export class ChatComponent implements OnInit {
   private chat(){
     if(this.messagecontent){
       // Check there is a message to send
-      var msg = new Message(this.user.username, this.messagecontent);
+      var msg = new Message(this.user.username, this.messagecontent, this.user.path);
       this.socketService.send(msg);
       this.messagecontent = null;
     } else {
@@ -103,7 +103,7 @@ export class ChatComponent implements OnInit {
    * Function that disconnects user from the room.
    */
   private leaveRoom(){
-    var msg = new Message(null, "A user has left the room.");
+    var msg = new Message(null, "A user has left the room.", null);
     this.socketService.send(msg);
     this.messages.push(msg);
     this.router.navigate(['']);
