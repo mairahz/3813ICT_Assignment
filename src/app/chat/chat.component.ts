@@ -123,7 +123,7 @@ export class ChatComponent implements OnInit {
   }
 
   /**
-   * submits the image to be sent as message
+   * Submits the image to be sent as message
    */
   imgSubmit(){
     var msg = new Message(this.user.username, this.messagecontent, this.user.path);
