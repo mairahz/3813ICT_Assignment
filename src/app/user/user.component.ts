@@ -141,5 +141,4 @@ export class UserComponent implements OnInit {
       (res) => {this.path = res.ok;}
     )
   }
-
 }

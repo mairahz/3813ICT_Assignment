@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
   channel: Channel;
   user: User;
   users: User[];
+  path: string;
 
   constructor(private socketService:SocketService, private router: Router, private route: ActivatedRoute, private service: RouteService) {
     this.valid = JSON.parse(localStorage.getItem("valid"));
@@ -107,6 +108,28 @@ export class ChatComponent implements OnInit {
     this.socketService.send(msg);
     this.messages.push(msg);
     this.router.navigate(['']);
+  }
+
+  /**
+   * Function that process image uploads.
+   */
+  processFile(imageInput){
+    const file: File = imageInput.files[0];
+    const form = new FormData();
+    form.append('file', file, file.name);
+    this.service.upFile(form).subscribe(
+      (res) => {this.path = res.ok;}
+    )
+  }
+
+  /**
+   * submits the image to be sent as message
+   */
+  imgSubmit(){
+    var msg = new Message(this.user.username, this.messagecontent, this.user.path);
+    msg.img = this.path;
+    this.socketService.send(msg);
+    this.path = null;
   }
   
 }
