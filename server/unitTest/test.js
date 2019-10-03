@@ -1,4 +1,4 @@
-let User = require('../../src/app/data/user.ts');
+
 let app = require('../server');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -9,14 +9,32 @@ chai.use(chaiHttp);
 
 describe('Test routes', () => {
   describe('/addCh Test 1', () => {
-    it('should get User details', (done) => {
-      user = new User('moo', 'moo');
-      chai.request(app).post('/api/login').type('form')
-      .send(user)
-        .end((err, res) => {
-          res.should.have.status(500);
-          done();
-        });
+    it('should get list of User details', (done) => {
+      chai.request(app).get('/api/readUsr')
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
+    });
+  });
+
+  describe('/addCh Test 2', () => {
+    it('should get list of User details', (done) => {
+      chai.request(app).get('/api/readUsr')
+      .end((err, res) => {
+        res.body.should.be.a('array');
+        done();
+      });
+    });
+  });
+
+  describe('/addCh Test 2', () => {
+    it('should get list of User details', (done) => {
+      chai.request(app).get('/api/readUsr')
+      .end((err, res) => {
+        res.body.should.be.a('array');
+        done();
+      });
     });
   });
   // describe('/addCh Test 1', () => {
